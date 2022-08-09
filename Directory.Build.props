@@ -1,0 +1,15 @@
+<Project>
+  <PropertyGroup>
+    <Description>End of chapter solutions for Statistical Rethinking: A Bayesian Course with Examples in R and Stan (Richard McElreath, 2020). 
+    </Description>
+    <Authors>Antonio Salomao</Authors>
+    <Copyright>Copyright 2022</Copyright>
+    <RepositoryUrl>https://github.com/aexsalomao/SharpRethinking</RepositoryUrl>
+    <PackageProjectUrl>https://aexsalomao.github.io/SharpRethinking/</PackageProjectUrl>
+    <FsDocsLicenseLink>"https://github.com/aexsalomao/SharpRethinking/blob/main/LICENSE.md"</FsDocsLicenseLink>
+    <FsDocsRepositoryLink>"https://github.com/aexsalomao/SharpRethinking"</FsDocsRepositoryLink>
+    <PackageIconUrl></PackageIconUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryType>git</RepositoryType>
+  </PropertyGroup>
+</Project>

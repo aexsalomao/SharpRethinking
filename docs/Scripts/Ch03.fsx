@@ -251,4 +251,3 @@ let pointEstimateAndlossFuncComparisonFig =
 (**
 Sampling to simulate prediction
 *)
-

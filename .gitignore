@@ -1,0 +1,9 @@
+.DS_Store
+
+.fake
+.ionide
+.fsdocs
+data-cache/
+output/
+tmp/
+docs/data-cache

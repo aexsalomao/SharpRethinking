@@ -8,12 +8,13 @@ index: 2
 *)
 
 #r "nuget: FSharp.Stats, 0.4.6"
-#r "nuget: Plotly.NET, 3.0.0"
-#r "nuget: Plotly.NET.Interactive, 3.0.0"
+#r "nuget: Plotly.NET,2.0.0-preview.17"
+#r "nuget: Plotly.NET.Interactive,2.0.0-preview.17"
 
 open FSharp.Stats
 open FSharp.Stats.Distributions
 open Plotly.NET
+open Plotly.NET.Interactive
 
 let computePosterior likelihood prior : list<float> = 
     prior
@@ -120,7 +121,12 @@ multiGridApproximationFig (fun x -> if float x < 0.5 then 0. else 1.) [10 .. 10 
 
 // (3) L,W,W,L,W,W,W
 // N = 7; W = 5; L = 2
-multiGridApproximationFig (fun x -> if float x < 0.5 then 0. else 1.) [10 .. 10 .. 100] 7 5 
+let a = multiGridApproximationFig (fun x -> if float x < 0.5 then 0. else 1.) [10 .. 10 .. 100] 7 5 
+
+(**
+testing
+*)
+a
 
 (**
 2M3. 
@@ -149,7 +155,4 @@ let prEarthGivenLand = (prLandGivenEarth * prEarth) / (prLand)
 2 Sides - B, W
 
 BB, BW, WW
-
-
-
 *)

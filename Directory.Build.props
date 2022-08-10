@@ -1,6 +1,6 @@
 <Project>
   <PropertyGroup>
-    <Description>End of chapter solutions for Statistical Rethinking: A Bayesian Course with Examples in R and Stan (Richard McElreath, 2020). 
+    <Description>Some notes on Statistical Rethinking: A Bayesian Course with Examples in R and Stan (Richard McElreath, 2020).
     </Description>
     <Authors>Antonio Salomao</Authors>
     <Copyright>Copyright 2022</Copyright>

@@ -9,41 +9,39 @@ index: 1
 
 namespace Common
 
-#r "nuget: FSharp.Stats, 0.4.6"
-#r "nuget: Numpy, 3.10.1.29"
 #r "nuget: Plotly.NET, 3.0.0"
 #r "nuget: Plotly.NET.Interactive, 3.0.0"
+#r "nuget: Numpy, 3.10.1.29"
+#r "nuget: MathNet.Numerics, 5.0.0"
 
-open System
 open Numpy
 open Plotly.NET
-open FSharp.Stats.Distributions
+open MathNet.Numerics
+open MathNet.Numerics.Distributions
 
-module rethinking = 
-    let private r = System.Random(0)
+module GridApproximation = 
+    let posteriorProbabilities prior likelihood : array<float> = 
+        let unstandardizedPosterior = 
+            prior
+            |> Array.zip likelihood
+            |> Array.map (fun (ll, p) -> ll * p)
+        
+        let sum = Array.sum unstandardizedPosterior
+        
+        unstandardizedPosterior 
+        |> Array.map (fun xs -> xs / sum)
 
-    let computePosterior likelihood prior : array<float> = 
-        prior
-        |> Array.zip likelihood
-        |> Array.map (fun (likelihood_i, prior_i) -> likelihood_i * prior_i)
-        |> fun unstandardizedPosterior -> 
-            let sum = Array.sum unstandardizedPosterior
-            unstandardizedPosterior |> Array.map (fun xs -> xs / sum)
-    
-    let binomialMultiGridApproximationFig priorFunc (points : list<int>) (nTrials : int) (nSucesses : int)= 
+    let binomialPosterior prior nTrials nSuccesses = 
+        Generate.LinearSpaced(Seq.length prior, 0., 1.)
+        |> Array.map (fun p -> Binomial.PMF(p=p, n=nTrials, k=nSuccesses))
+        |> posteriorProbabilities prior
+
+    let multiBinominalPosteriorFig priorFunc points nTrials nSuccesses = 
         points
-        |> List.map (fun nPointsToEstimate -> 
-            let probas = [|0. .. (1. / (float nPointsToEstimate - 1.)) .. 
-                if nTrials <> nSucesses then 1. 
-                else 0.999999999999999|]
-
-            let prior, likelihood = 
-                probas 
-                |> Array.map (fun p -> 
-                    priorFunc p, (Discrete.binomial p nTrials).PDF nSucesses)
-                |> Array.unzip
-            
-            Chart.Line(probas, computePosterior likelihood prior, Name = $"# Grid Points: {probas.Length}"))
+        |> Seq.map (fun xs -> 
+            let probas = [|0. .. (1. / (float xs - 1.)) .. 1.|]
+            let prior = probas|> Array.map priorFunc
+            Chart.Line(probas, binomialPosterior prior nTrials nSuccesses, Name = $"# Grid Points: {probas.Length}"))
         |> Chart.combine
         |> Chart.withTitle("Grid approximate posterior distribution")
         |> Chart.withXAxisStyle("Proportion of water (parameter p)", MinMax=(0., 1.))

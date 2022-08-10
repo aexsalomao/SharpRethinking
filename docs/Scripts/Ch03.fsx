@@ -8,22 +8,25 @@ index: 3
 *)
 
 #load "Common.fsx"
-#r "nuget: FSharp.Stats, 0.4.6"
+#r "nuget: FSharp.Stats, 0.4.7"
 #r "nuget: Plotly.NET, 3.0.0"
 #r "nuget: Plotly.NET.Interactive, 3.0.0"
 #r "nuget: Numpy, 3.10.1.29"
-#r "nuget: Microsoft.Solver.Foundation, 3.1.0"
 #r "nuget: MathNet.Numerics, 5.0.0"
 
 open System
-open Common
-open Common.NumpyUtils
 open FSharp.Stats
-open Plotly.NET
 open Numpy
+open Plotly.NET
+open Plotly.NET.Interactive
+open Plotly.NET.LayoutObjects
 open MathNet.Numerics
 open MathNet.Numerics.Distributions
-open Plotly.NET.LayoutObjects
+
+Environment.CurrentDirectory <- __SOURCE_DIRECTORY__
+open Common
+open Common.GridApproximation
+open Common.NumpyUtils
 
 (**
 **Reconstructing the posterior distribution via sampling.**
@@ -43,7 +46,7 @@ let samplingVsGridApproximationFig =
     let probas = Generate.LinearSpaced(1000, 0., 1.)
     let prior = [|for _ in 0. .. ((float probas.Length) - 1.) -> 1.|]
     let likelihood = [|for p in probas -> Binomial.PMF(p=p, n=nTrials, k=nSuccesses)|]
-    let posterior = rethinking.computePosterior likelihood prior
+    let posterior = GridApproximation.posteriorProbabilities likelihood prior
 
     [100; 1000; 10000; 100000]
     |> List.map (fun xs -> 
@@ -57,7 +60,7 @@ let samplingVsGridApproximationFig =
     |> Chart.withYAxisStyle("Counts")
     |> fun samplingFig ->
         [samplingFig; 
-         rethinking.binomialMultiGridApproximationFig (fun x -> 1.) [probas.Length] nTrials nSuccesses]
+         GridApproximation.multiBinominalPosteriorFig (fun x -> 1.) [probas.Length] nTrials nSuccesses]
         |> Chart.Grid(2, 1)
         |> Chart.withSize(1500, 750)
         |> Chart.withTitle($"Binomial Distribution (nTrials: {nTrials}, nSucesses: {nSuccesses})")
@@ -122,7 +125,7 @@ let nSuccesses = 3
 let paramGrid = Generate.LinearSpaced(1000, 0., 1.)
 let prior = [|for _ in 0. .. ((float paramGrid.Length) - 1.) -> 1.|]
 let likelihood = [|for p in paramGrid -> Binomial.PMF(p=p, n=nTrials, k=nSuccesses)|]
-let posterior = rethinking.computePosterior likelihood prior
+let posterior = GridApproximation.posteriorProbabilities likelihood prior
 let samples = np.random.choice(a=toNDarray paramGrid, size=[|1000000|], replace=true, p=toNDarray posterior) |> toSharp
 
 let intervalComparisonFig = 
@@ -247,6 +250,7 @@ let pointEstimateAndlossFuncComparisonFig =
     |> Chart.Grid(1, 3)
     |> Chart.withSize(1800., 500.)
     |> Chart.withTitle(chartTitle)
+    |> Chart.show
 
 (**
 Sampling to simulate prediction

@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Chapter 2</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="">
+
+    <link rel="stylesheet" id="theme_link" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.6.0/materia/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
+    <link type="text/css" rel="stylesheet" href="/SharpRethinking/content/navbar-fixed-left.css" />
+    <link type="text/css" rel="stylesheet" href="/SharpRethinking/content/fsdocs-default.css" />
+    <link type="text/css" rel="stylesheet" href="/SharpRethinking/content/fsdocs-custom.css" />
+    <script type="text/javascript" src="/SharpRethinking/content/fsdocs-tips.js"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+    <!-- END SEARCH BOX: this adds support for the search box -->
+    
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md navbar-light bg-secondary fixed-left" id="fsdocs-nav">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse navbar-nav-scroll" id="navbarsExampleDefault">
+            <a href="/SharpRethinking/"><img id="fsdocs-logo" src="/SharpRethinking/img/logo.png" /></a>
+            <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+            <div id="header">
+                <div class="searchbox" id="fsdocs-searchbox">
+                    <label for="search-by">
+                        <i class="fas fa-search"></i>
+                    </label>
+                    <input data-search-input="" id="search-by" type="search" placeholder="Search..." />
+                    <span data-search-clear="">
+                        <i class="fas fa-times"></i>
+                    </span>
+                </div>
+            </div>
+
+            <!-- END SEARCH BOX: this adds support for the search box -->
+            <ul class="navbar-nav">
+                <li class="nav-header">Links</li>
+                <li class="nav-item" id="fsdocs-license-link"><a class="nav-link" href="{{fsdocs-license-link}}">License</a></li>
+                <li class="nav-item" id="fsdocs-release-notes-link"><a class="nav-link" href="{{fsdocs-release-notes-link}}">Release Notes</a></li>
+                <li class="nav-item" id="fsdocs-repository-link"><a class="nav-link" href="{{fsdocs-repository-link}}">Source Repository</a></li>
+                <li class="nav-header">
+  Scripts
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/SharpRethinking/Scripts/Common.html">
+    Common
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/SharpRethinking/Scripts/Ch02.html">
+    Chapter 2
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/SharpRethinking/Scripts/Ch03.html">
+    Chapter 3
+  </a>
+</li>
+                {{fsdocs-list-of-namespaces}}
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="masthead">
+            <h3 class="muted"><a href="/SharpRethinking/">SharpRethinking</a></h3>
+        </div>
+        <hr />
+        <div class="container" id="fsdocs-content">
+            
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="pp">#r</span> <span class="s">&quot;nuget: FSharp.Stats, 0.4.6&quot;</span>
+<span class="pp">#r</span> <span class="s">&quot;nuget: Plotly.NET,2.0.0-preview.17&quot;</span>
+<span class="pp">#r</span> <span class="s">&quot;nuget: Plotly.NET.Interactive,2.0.0-preview.17&quot;</span>
+
+<span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 1)" onmouseover="showTip(event, 'fs1', 1)" class="id">FSharp</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs2', 2)" onmouseover="showTip(event, 'fs2', 2)" class="id">Stats</span>
+<span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 3)" onmouseover="showTip(event, 'fs1', 3)" class="id">FSharp</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs2', 4)" onmouseover="showTip(event, 'fs2', 4)" class="id">Stats</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs3', 5)" onmouseover="showTip(event, 'fs3', 5)" class="id">Distributions</span>
+<span class="k">open</span> <span onmouseout="hideTip(event, 'fs4', 6)" onmouseover="showTip(event, 'fs4', 6)" class="id">Plotly</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs5', 7)" onmouseover="showTip(event, 'fs5', 7)" class="id">NET</span>
+<span class="k">open</span> <span onmouseout="hideTip(event, 'fs4', 8)" onmouseover="showTip(event, 'fs4', 8)" class="id">Plotly</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs5', 9)" onmouseover="showTip(event, 'fs5', 9)" class="id">NET</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs6', 10)" onmouseover="showTip(event, 'fs6', 10)" class="id">Interactive</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs7', 11)" onmouseover="showTip(event, 'fs7', 11)" class="fn">computePosterior</span> <span onmouseout="hideTip(event, 'fs8', 12)" onmouseover="showTip(event, 'fs8', 12)" class="fn">likelihood</span> <span onmouseout="hideTip(event, 'fs9', 13)" onmouseover="showTip(event, 'fs9', 13)" class="fn">prior</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs10', 14)" onmouseover="showTip(event, 'fs10', 14)" class="rt">list</span><span class="pn">&lt;</span><span onmouseout="hideTip(event, 'fs11', 15)" onmouseover="showTip(event, 'fs11', 15)" class="vt">float</span><span class="pn">&gt;</span> <span class="o">=</span> 
+    <span onmouseout="hideTip(event, 'fs9', 16)" onmouseover="showTip(event, 'fs9', 16)" class="fn">prior</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs12', 17)" onmouseover="showTip(event, 'fs12', 17)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs13', 18)" onmouseover="showTip(event, 'fs13', 18)" class="id">zip</span> <span onmouseout="hideTip(event, 'fs8', 19)" onmouseover="showTip(event, 'fs8', 19)" class="fn">likelihood</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs12', 20)" onmouseover="showTip(event, 'fs12', 20)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs14', 21)" onmouseover="showTip(event, 'fs14', 21)" class="id">map</span> <span class="pn">(</span><span class="k">fun</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs15', 22)" onmouseover="showTip(event, 'fs15', 22)" class="fn">likelihood_i</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs16', 23)" onmouseover="showTip(event, 'fs16', 23)" class="fn">prior_i</span><span class="pn">)</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs15', 24)" onmouseover="showTip(event, 'fs15', 24)" class="fn">likelihood_i</span> <span class="o">*</span> <span onmouseout="hideTip(event, 'fs16', 25)" onmouseover="showTip(event, 'fs16', 25)" class="fn">prior_i</span><span class="pn">)</span>
+    <span class="o">|&gt;</span> <span class="k">fun</span> <span onmouseout="hideTip(event, 'fs17', 26)" onmouseover="showTip(event, 'fs17', 26)" class="fn">unstandardizedPosterior</span> <span class="k">-&gt;</span> 
+        <span class="k">let</span> <span onmouseout="hideTip(event, 'fs18', 27)" onmouseover="showTip(event, 'fs18', 27)" class="fn">sum</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs12', 28)" onmouseover="showTip(event, 'fs12', 28)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs19', 29)" onmouseover="showTip(event, 'fs19', 29)" class="id">sum</span> <span onmouseout="hideTip(event, 'fs17', 30)" onmouseover="showTip(event, 'fs17', 30)" class="fn">unstandardizedPosterior</span>
+        <span onmouseout="hideTip(event, 'fs17', 31)" onmouseover="showTip(event, 'fs17', 31)" class="fn">unstandardizedPosterior</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs12', 32)" onmouseover="showTip(event, 'fs12', 32)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs14', 33)" onmouseover="showTip(event, 'fs14', 33)" class="id">map</span> <span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs20', 34)" onmouseover="showTip(event, 'fs20', 34)" class="fn">xs</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs20', 35)" onmouseover="showTip(event, 'fs20', 35)" class="fn">xs</span> <span class="o">/</span> <span onmouseout="hideTip(event, 'fs18', 36)" onmouseover="showTip(event, 'fs18', 36)" class="fn">sum</span><span class="pn">)</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs21', 37)" onmouseover="showTip(event, 'fs21', 37)" class="fn">gridApproximationFig</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs22', 38)" onmouseover="showTip(event, 'fs22', 38)" class="fn">probas</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs10', 39)" onmouseover="showTip(event, 'fs10', 39)" class="rt">list</span><span class="pn">&lt;</span><span onmouseout="hideTip(event, 'fs11', 40)" onmouseover="showTip(event, 'fs11', 40)" class="vt">float</span><span class="pn">&gt;</span><span class="pn">)</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs9', 41)" onmouseover="showTip(event, 'fs9', 41)" class="fn">prior</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs10', 42)" onmouseover="showTip(event, 'fs10', 42)" class="rt">list</span><span class="pn">&lt;</span><span onmouseout="hideTip(event, 'fs11', 43)" onmouseover="showTip(event, 'fs11', 43)" class="vt">float</span><span class="pn">&gt;</span><span class="pn">)</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs8', 44)" onmouseover="showTip(event, 'fs8', 44)" class="fn">likelihood</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs10', 45)" onmouseover="showTip(event, 'fs10', 45)" class="rt">list</span><span class="pn">&lt;</span><span onmouseout="hideTip(event, 'fs11', 46)" onmouseover="showTip(event, 'fs11', 46)" class="vt">float</span><span class="pn">&gt;</span><span class="pn">)</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs23', 47)" onmouseover="showTip(event, 'fs23', 47)" class="m">GenericChart</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs24', 48)" onmouseover="showTip(event, 'fs24', 48)" class="id">GenericChart</span> <span class="o">=</span> 
+    <span class="pn">[</span>
+        <span onmouseout="hideTip(event, 'fs25', 49)" onmouseover="showTip(event, 'fs25', 49)" class="rt">Chart</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs26', 50)" onmouseover="showTip(event, 'fs26', 50)" class="id">Line</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs22', 51)" onmouseover="showTip(event, 'fs22', 51)" class="fn">probas</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs9', 52)" onmouseover="showTip(event, 'fs9', 52)" class="fn">prior</span><span class="pn">,</span> <span class="fn">ShowMarkers</span><span class="o">=</span><span class="k">true</span><span class="pn">,</span> <span class="fn">Name</span><span class="o">=</span><span class="s">&quot;Prior&quot;</span><span class="pn">)</span><span class="pn">;</span> 
+        <span onmouseout="hideTip(event, 'fs25', 53)" onmouseover="showTip(event, 'fs25', 53)" class="rt">Chart</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs26', 54)" onmouseover="showTip(event, 'fs26', 54)" class="id">Line</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs22', 55)" onmouseover="showTip(event, 'fs22', 55)" class="fn">probas</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs8', 56)" onmouseover="showTip(event, 'fs8', 56)" class="fn">likelihood</span><span class="pn">,</span> <span class="fn">ShowMarkers</span><span class="o">=</span><span class="k">true</span><span class="pn">,</span> <span class="fn">Name</span><span class="o">=</span><span class="s">&quot;Likelihood&quot;</span><span class="pn">)</span><span class="pn">;</span> 
+        <span onmouseout="hideTip(event, 'fs25', 57)" onmouseover="showTip(event, 'fs25', 57)" class="rt">Chart</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs26', 58)" onmouseover="showTip(event, 'fs26', 58)" class="id">Line</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs22', 59)" onmouseover="showTip(event, 'fs22', 59)" class="fn">probas</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs7', 60)" onmouseover="showTip(event, 'fs7', 60)" class="fn">computePosterior</span> <span onmouseout="hideTip(event, 'fs9', 61)" onmouseover="showTip(event, 'fs9', 61)" class="fn">prior</span> <span onmouseout="hideTip(event, 'fs8', 62)" onmouseover="showTip(event, 'fs8', 62)" class="fn">likelihood</span><span class="pn">,</span> <span class="fn">ShowMarkers</span><span class="o">=</span><span class="k">true</span><span class="pn">,</span> <span class="fn">Name</span><span class="o">=</span><span class="s">&quot;Posterior&quot;</span><span class="pn">)</span>
+    <span class="pn">]</span> 
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs25', 63)" onmouseover="showTip(event, 'fs25', 63)" class="rt">Chart</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs27', 64)" onmouseover="showTip(event, 'fs27', 64)" class="id">Grid</span><span class="pn">(</span><span class="n">1</span><span class="pn">,</span> <span class="n">3</span><span class="pn">)</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs25', 65)" onmouseover="showTip(event, 'fs25', 65)" class="rt">Chart</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs28', 66)" onmouseover="showTip(event, 'fs28', 66)" class="id">withTitle</span><span class="pn">(</span><span class="s">$&quot;Grid approximation (n: {</span><span onmouseout="hideTip(event, 'fs22', 67)" onmouseover="showTip(event, 'fs22', 67)" class="fn">probas</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs29', 68)" onmouseover="showTip(event, 'fs29', 68)" class="id">Length</span><span class="s">})&quot;</span><span class="pn">)</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs25', 69)" onmouseover="showTip(event, 'fs25', 69)" class="rt">Chart</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs30', 70)" onmouseover="showTip(event, 'fs30', 70)" class="id">withYAxisStyle</span><span class="pn">(</span><span class="fn">TitleText</span><span class="o">=</span><span class="s">&quot;Plausibility&quot;</span><span class="pn">)</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs25', 71)" onmouseover="showTip(event, 'fs25', 71)" class="rt">Chart</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs31', 72)" onmouseover="showTip(event, 'fs31', 72)" class="id">withSize</span><span class="pn">(</span><span class="n">1500.0</span><span class="pn">,</span> <span class="n">500.0</span><span class="pn">)</span>
+
+<span class="c">// Grid approximation</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs32', 73)" onmouseover="showTip(event, 'fs32', 73)" class="id">n</span> <span class="o">=</span> <span class="n">50.</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs22', 74)" onmouseover="showTip(event, 'fs22', 74)" class="id">probas</span> <span class="o">=</span> <span class="pn">[</span><span class="o">0.</span> <span class="o">..</span> <span class="pn">(</span><span class="n">1.</span> <span class="o">/</span> <span onmouseout="hideTip(event, 'fs32', 75)" onmouseover="showTip(event, 'fs32', 75)" class="id">n</span><span class="pn">)</span> <span class="o">..</span> <span class="n">1.</span><span class="pn">]</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs33', 76)" onmouseover="showTip(event, 'fs33', 76)" class="id">flatPrior</span> <span class="o">=</span> <span class="pn">[</span><span class="k">for</span> <span class="id">_</span> <span class="k">in</span> <span class="n">0.</span> <span class="o">..</span> <span onmouseout="hideTip(event, 'fs32', 77)" onmouseover="showTip(event, 'fs32', 77)" class="id">n</span> <span class="k">-&gt;</span> <span class="n">1.</span><span class="pn">]</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs8', 78)" onmouseover="showTip(event, 'fs8', 78)" class="id">likelihood</span> <span class="o">=</span> <span class="pn">[</span><span class="k">for</span> <span onmouseout="hideTip(event, 'fs34', 79)" onmouseover="showTip(event, 'fs34', 79)" class="fn">p</span> <span class="k">in</span> <span onmouseout="hideTip(event, 'fs22', 80)" onmouseover="showTip(event, 'fs22', 80)" class="id">probas</span> <span class="k">-&gt;</span> <span class="fn">(</span><span onmouseout="hideTip(event, 'fs35', 81)" onmouseover="showTip(event, 'fs35', 81)" class="m">Discrete</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs36', 82)" onmouseover="showTip(event, 'fs36', 82)" class="id">binomial</span> <span onmouseout="hideTip(event, 'fs34', 83)" onmouseover="showTip(event, 'fs34', 83)" class="fn">p</span> <span class="n">9</span><span class="pn">)</span><span class="pn">.</span><span class="id">PDF</span> <span class="n">6</span><span class="pn">]</span>
+</code></pre>
+<p>The target of inference in Bayesian inference is a posterior probability distribution.</p>
+<p>Practice</p>
+<p>Easy</p>
+<p>2E1. Pr(rain|Monday)
+2E2. The probability that it is Monday, given that it is raining.
+2E3. Pr(Monday|rain); Pr(rain|Monday)Pr(Monday) / Pr(rain)
+2E4. "the probability of water is 0.7" -&gt; Here, 0.7 represents the proportion of the globe that is covered in water.</p>
+<p>Medium</p>
+<p>2M1. Recall the globe tossing model from the chapter. Compute and plot the grid approximate
+posterior distribution for each of the following sets of observations.In each case, assume a uniform
+prior for p.
+(1) W,W,W
+(2) W,W,W,L
+(3) L,W,W,L,W,W,W</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs37', 84)" onmouseover="showTip(event, 'fs37', 84)" class="fn">multiGridApproximationFig</span> <span onmouseout="hideTip(event, 'fs38', 85)" onmouseover="showTip(event, 'fs38', 85)" class="fn">priorFunc</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs39', 86)" onmouseover="showTip(event, 'fs39', 86)" class="fn">points</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs10', 87)" onmouseover="showTip(event, 'fs10', 87)" class="rt">list</span><span class="pn">&lt;</span><span onmouseout="hideTip(event, 'fs40', 88)" onmouseover="showTip(event, 'fs40', 88)" class="vt">int</span><span class="pn">&gt;</span><span class="pn">)</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs41', 89)" onmouseover="showTip(event, 'fs41', 89)" class="fn">nTrials</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs40', 90)" onmouseover="showTip(event, 'fs40', 90)" class="vt">int</span><span class="pn">)</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs42', 91)" onmouseover="showTip(event, 'fs42', 91)" class="fn">nSucesses</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs40', 92)" onmouseover="showTip(event, 'fs40', 92)" class="vt">int</span><span class="pn">)</span><span class="o">=</span> 
+    <span onmouseout="hideTip(event, 'fs39', 93)" onmouseover="showTip(event, 'fs39', 93)" class="fn">points</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs12', 94)" onmouseover="showTip(event, 'fs12', 94)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs14', 95)" onmouseover="showTip(event, 'fs14', 95)" class="id">map</span> <span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs43', 96)" onmouseover="showTip(event, 'fs43', 96)" class="fn">nPointsToEstimate</span> <span class="k">-&gt;</span> 
+        <span class="k">let</span> <span onmouseout="hideTip(event, 'fs22', 97)" onmouseover="showTip(event, 'fs22', 97)" class="fn">probas</span> <span class="o">=</span> <span class="pn">[</span><span class="o">0.</span> <span class="o">..</span> <span class="pn">(</span><span class="n">1.</span> <span class="o">/</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs11', 98)" onmouseover="showTip(event, 'fs11', 98)" class="fn">float</span> <span onmouseout="hideTip(event, 'fs43', 99)" onmouseover="showTip(event, 'fs43', 99)" class="fn">nPointsToEstimate</span> <span class="o">-</span> <span class="n">1.</span><span class="pn">)</span><span class="pn">)</span> <span class="o">..</span> 
+            <span class="k">if</span> <span onmouseout="hideTip(event, 'fs41', 100)" onmouseover="showTip(event, 'fs41', 100)" class="fn">nTrials</span> <span class="o">&lt;&gt;</span> <span onmouseout="hideTip(event, 'fs42', 101)" onmouseover="showTip(event, 'fs42', 101)" class="fn">nSucesses</span> <span class="k">then</span> <span class="n">1.</span> 
+            <span class="k">else</span> <span class="n">0.999999999999999</span><span class="pn">]</span>
+
+        <span class="k">let</span> <span onmouseout="hideTip(event, 'fs9', 102)" onmouseover="showTip(event, 'fs9', 102)" class="fn">prior</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs8', 103)" onmouseover="showTip(event, 'fs8', 103)" class="fn">likelihood</span> <span class="o">=</span> 
+            <span onmouseout="hideTip(event, 'fs22', 104)" onmouseover="showTip(event, 'fs22', 104)" class="fn">probas</span> 
+            <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs12', 105)" onmouseover="showTip(event, 'fs12', 105)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs14', 106)" onmouseover="showTip(event, 'fs14', 106)" class="id">map</span> <span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs34', 107)" onmouseover="showTip(event, 'fs34', 107)" class="fn">p</span> <span class="k">-&gt;</span> 
+                <span onmouseout="hideTip(event, 'fs38', 108)" onmouseover="showTip(event, 'fs38', 108)" class="fn">priorFunc</span> <span onmouseout="hideTip(event, 'fs34', 109)" onmouseover="showTip(event, 'fs34', 109)" class="fn">p</span><span class="pn">,</span> <span class="fn">(</span><span onmouseout="hideTip(event, 'fs35', 110)" onmouseover="showTip(event, 'fs35', 110)" class="m">Discrete</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs36', 111)" onmouseover="showTip(event, 'fs36', 111)" class="id">binomial</span> <span onmouseout="hideTip(event, 'fs34', 112)" onmouseover="showTip(event, 'fs34', 112)" class="fn">p</span> <span onmouseout="hideTip(event, 'fs41', 113)" onmouseover="showTip(event, 'fs41', 113)" class="fn">nTrials</span><span class="pn">)</span><span class="pn">.</span><span class="id">PDF</span> <span onmouseout="hideTip(event, 'fs42', 114)" onmouseover="showTip(event, 'fs42', 114)" class="fn">nSucesses</span><span class="pn">)</span>
+            <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs12', 115)" onmouseover="showTip(event, 'fs12', 115)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs44', 116)" onmouseover="showTip(event, 'fs44', 116)" class="id">unzip</span>
+        
+        <span onmouseout="hideTip(event, 'fs25', 117)" onmouseover="showTip(event, 'fs25', 117)" class="rt">Chart</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs26', 118)" onmouseover="showTip(event, 'fs26', 118)" class="id">Line</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs22', 119)" onmouseover="showTip(event, 'fs22', 119)" class="fn">probas</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs7', 120)" onmouseover="showTip(event, 'fs7', 120)" class="fn">computePosterior</span> <span onmouseout="hideTip(event, 'fs8', 121)" onmouseover="showTip(event, 'fs8', 121)" class="fn">likelihood</span> <span onmouseout="hideTip(event, 'fs9', 122)" onmouseover="showTip(event, 'fs9', 122)" class="fn">prior</span><span class="pn">,</span> <span class="fn">Name</span> <span class="o">=</span> <span class="s">$&quot;#Points: {</span><span onmouseout="hideTip(event, 'fs22', 123)" onmouseover="showTip(event, 'fs22', 123)" class="fn">probas</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs29', 124)" onmouseover="showTip(event, 'fs29', 124)" class="id">Length</span><span class="s">}&quot;</span><span class="pn">)</span><span class="pn">)</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs25', 125)" onmouseover="showTip(event, 'fs25', 125)" class="rt">Chart</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs45', 126)" onmouseover="showTip(event, 'fs45', 126)" class="id">combine</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs25', 127)" onmouseover="showTip(event, 'fs25', 127)" class="rt">Chart</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs28', 128)" onmouseover="showTip(event, 'fs28', 128)" class="id">withTitle</span><span class="pn">(</span><span class="s">&quot;Grid approximate posterior distribution&quot;</span><span class="pn">)</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs25', 129)" onmouseover="showTip(event, 'fs25', 129)" class="rt">Chart</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs46', 130)" onmouseover="showTip(event, 'fs46', 130)" class="id">withXAxisStyle</span><span class="pn">(</span><span class="s">&quot;Proportion of water (parameter p)&quot;</span><span class="pn">)</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs25', 131)" onmouseover="showTip(event, 'fs25', 131)" class="rt">Chart</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs30', 132)" onmouseover="showTip(event, 'fs30', 132)" class="id">withYAxisStyle</span><span class="pn">(</span><span class="s">&quot;Posterior probability&quot;</span><span class="pn">)</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs25', 133)" onmouseover="showTip(event, 'fs25', 133)" class="rt">Chart</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs31', 134)" onmouseover="showTip(event, 'fs31', 134)" class="id">withSize</span><span class="pn">(</span><span class="n">650.</span><span class="pn">,</span> <span class="n">650.</span><span class="pn">)</span>
+
+<span class="c">// (1) W,W,W</span>
+<span class="c">// N = 3; W = 3 ; L = 0</span>
+<span onmouseout="hideTip(event, 'fs37', 135)" onmouseover="showTip(event, 'fs37', 135)" class="fn">multiGridApproximationFig</span> <span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs47', 136)" onmouseover="showTip(event, 'fs47', 136)" class="fn">x</span> <span class="k">-&gt;</span> <span class="n">1.</span><span class="pn">)</span> <span class="pn">[</span><span class="o">10</span> <span class="o">..</span> <span class="n">10</span> <span class="o">..</span> <span class="n">100</span><span class="pn">]</span> <span class="n">3</span> <span class="n">3</span>
+
+<span class="c">// (2) W,W,W,L</span>
+<span class="c">// N = 4; W = 3; L = 1</span>
+<span onmouseout="hideTip(event, 'fs37', 137)" onmouseover="showTip(event, 'fs37', 137)" class="fn">multiGridApproximationFig</span> <span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs47', 138)" onmouseover="showTip(event, 'fs47', 138)" class="fn">x</span> <span class="k">-&gt;</span> <span class="n">1.</span><span class="pn">)</span> <span class="pn">[</span><span class="o">10</span> <span class="o">..</span> <span class="n">10</span> <span class="o">..</span> <span class="n">100</span><span class="pn">]</span> <span class="n">4</span> <span class="n">3</span>
+
+<span class="c">// (3) L,W,W,L,W,W,W</span>
+<span class="c">// N = 7; W = 5; L = 2</span>
+<span onmouseout="hideTip(event, 'fs37', 139)" onmouseover="showTip(event, 'fs37', 139)" class="fn">multiGridApproximationFig</span> <span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs47', 140)" onmouseover="showTip(event, 'fs47', 140)" class="fn">x</span> <span class="k">-&gt;</span> <span class="n">1.</span><span class="pn">)</span> <span class="pn">[</span><span class="o">10</span> <span class="o">..</span> <span class="n">10</span> <span class="o">..</span> <span class="n">100</span><span class="pn">]</span> <span class="n">10</span> <span class="n">1</span>
+</code></pre>
+<p>2M2. Now assume a prior for p that is equal to zero when p &lt; 0.5 and is a positive constant when
+p ≥ 0.5. Again compute and plot the grid approximate posterior distribution for each of the sets of
+observations in the problem just above.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="c">// (1) W,W,W</span>
+<span class="c">// N = 3; W = 3 ; L = 0</span>
+<span onmouseout="hideTip(event, 'fs37', 141)" onmouseover="showTip(event, 'fs37', 141)" class="fn">multiGridApproximationFig</span> <span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs47', 142)" onmouseover="showTip(event, 'fs47', 142)" class="fn">x</span> <span class="k">-&gt;</span> <span class="k">if</span> <span onmouseout="hideTip(event, 'fs11', 143)" onmouseover="showTip(event, 'fs11', 143)" class="fn">float</span> <span onmouseout="hideTip(event, 'fs47', 144)" onmouseover="showTip(event, 'fs47', 144)" class="fn">x</span> <span class="o">&lt;</span> <span class="n">0.5</span> <span class="k">then</span> <span class="n">0.</span> <span class="k">else</span> <span class="n">1.</span><span class="pn">)</span> <span class="pn">[</span><span class="o">10</span> <span class="o">..</span> <span class="n">10</span> <span class="o">..</span> <span class="n">100</span><span class="pn">]</span> <span class="n">3</span> <span class="n">3</span> 
+
+<span class="c">// (2) W,W,W,L</span>
+<span class="c">// N = 4; W = 3; L = 1</span>
+<span onmouseout="hideTip(event, 'fs37', 145)" onmouseover="showTip(event, 'fs37', 145)" class="fn">multiGridApproximationFig</span> <span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs47', 146)" onmouseover="showTip(event, 'fs47', 146)" class="fn">x</span> <span class="k">-&gt;</span> <span class="k">if</span> <span onmouseout="hideTip(event, 'fs11', 147)" onmouseover="showTip(event, 'fs11', 147)" class="fn">float</span> <span onmouseout="hideTip(event, 'fs47', 148)" onmouseover="showTip(event, 'fs47', 148)" class="fn">x</span> <span class="o">&lt;</span> <span class="n">0.5</span> <span class="k">then</span> <span class="n">0.</span> <span class="k">else</span> <span class="n">1.</span><span class="pn">)</span> <span class="pn">[</span><span class="o">10</span> <span class="o">..</span> <span class="n">10</span> <span class="o">..</span> <span class="n">100</span><span class="pn">]</span> <span class="n">4</span> <span class="n">3</span> 
+
+<span class="c">// (3) L,W,W,L,W,W,W</span>
+<span class="c">// N = 7; W = 5; L = 2</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs48', 149)" onmouseover="showTip(event, 'fs48', 149)" class="id">a</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs37', 150)" onmouseover="showTip(event, 'fs37', 150)" class="fn">multiGridApproximationFig</span> <span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs47', 151)" onmouseover="showTip(event, 'fs47', 151)" class="fn">x</span> <span class="k">-&gt;</span> <span class="k">if</span> <span onmouseout="hideTip(event, 'fs11', 152)" onmouseover="showTip(event, 'fs11', 152)" class="fn">float</span> <span onmouseout="hideTip(event, 'fs47', 153)" onmouseover="showTip(event, 'fs47', 153)" class="fn">x</span> <span class="o">&lt;</span> <span class="n">0.5</span> <span class="k">then</span> <span class="n">0.</span> <span class="k">else</span> <span class="n">1.</span><span class="pn">)</span> <span class="pn">[</span><span class="o">10</span> <span class="o">..</span> <span class="n">10</span> <span class="o">..</span> <span class="n">100</span><span class="pn">]</span> <span class="n">7</span> <span class="n">5</span> 
+</code></pre>
+<p>testing</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs48', 154)" onmouseover="showTip(event, 'fs48', 154)" class="id">a</span>
+</code></pre>
+<p>2M3.
+Suppose there are two globes, one for Earth and one for Mars.
+The Earth globe is 70% covered in water. The Mars globe is 100% land.
+Further suppose that one of these globes—you don’t know which—was tossed in the air and produced a “land” observation.
+Assume that each globe was equally likely to be tossed. Show that the posterior probability that the globe was the Earth,
+conditional on seeing “land” (Pr(Earth|land)), is 0.23.</p>
+<p>Pr(Earth|Land) = 0.23
+Pr(Earth|Land) = Pr(Land|Earth) * Pr(Earth) / Pr(Land)</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs49', 155)" onmouseover="showTip(event, 'fs49', 155)" class="id">prLandGivenEarth</span> <span class="o">=</span> <span class="n">0.3</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs50', 156)" onmouseover="showTip(event, 'fs50', 156)" class="id">prLandGivenMars</span> <span class="o">=</span> <span class="n">1.</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs51', 157)" onmouseover="showTip(event, 'fs51', 157)" class="id">prEarth</span> <span class="o">=</span> <span class="n">0.5</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs52', 158)" onmouseover="showTip(event, 'fs52', 158)" class="id">prMars</span> <span class="o">=</span> <span class="n">0.5</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs53', 159)" onmouseover="showTip(event, 'fs53', 159)" class="id">prLand</span> <span class="o">=</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs52', 160)" onmouseover="showTip(event, 'fs52', 160)" class="id">prMars</span> <span class="o">*</span> <span onmouseout="hideTip(event, 'fs50', 161)" onmouseover="showTip(event, 'fs50', 161)" class="id">prLandGivenMars</span><span class="pn">)</span> <span class="o">+</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs51', 162)" onmouseover="showTip(event, 'fs51', 162)" class="id">prEarth</span> <span class="o">*</span> <span onmouseout="hideTip(event, 'fs49', 163)" onmouseover="showTip(event, 'fs49', 163)" class="id">prLandGivenEarth</span><span class="pn">)</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs54', 164)" onmouseover="showTip(event, 'fs54', 164)" class="id">prEarthGivenLand</span> <span class="o">=</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs49', 165)" onmouseover="showTip(event, 'fs49', 165)" class="id">prLandGivenEarth</span> <span class="o">*</span> <span onmouseout="hideTip(event, 'fs51', 166)" onmouseover="showTip(event, 'fs51', 166)" class="id">prEarth</span><span class="pn">)</span> <span class="o">/</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs53', 167)" onmouseover="showTip(event, 'fs53', 167)" class="id">prLand</span><span class="pn">)</span>
+</code></pre>
+<p>2M4.</p>
+<p>3 Cards - X, Y, Z
+2 Sides - B, W</p>
+<p>BB, BW, WW</p>
+
+            <div class="fsdocs-tip" id="fs1">Multiple items<br />namespace FSharp<br /><br />--------------------<br />namespace Microsoft.FSharp</div>
+<div class="fsdocs-tip" id="fs2">namespace FSharp.Stats</div>
+<div class="fsdocs-tip" id="fs3">namespace FSharp.Stats.Distributions</div>
+<div class="fsdocs-tip" id="fs4">namespace Plotly</div>
+<div class="fsdocs-tip" id="fs5">namespace Plotly.NET</div>
+<div class="fsdocs-tip" id="fs6">namespace Plotly.NET.Interactive</div>
+<div class="fsdocs-tip" id="fs7">val computePosterior: likelihood: float list -&gt; prior: float list -&gt; float list</div>
+<div class="fsdocs-tip" id="fs8">val likelihood: float list</div>
+<div class="fsdocs-tip" id="fs9">val prior: float list</div>
+<div class="fsdocs-tip" id="fs10">type &#39;T list = List&lt;&#39;T&gt;<br /><em>&lt;summary&gt;The type of immutable singly-linked lists. &lt;/summary&gt;<br />&lt;remarks&gt;See the &lt;see cref=&quot;T:Microsoft.FSharp.Collections.ListModule&quot; /&gt; module for further operations related to lists.
+
+ Use the constructors &lt;c&gt;[]&lt;/c&gt; and &lt;c&gt;::&lt;/c&gt; (infix) to create values of this type, or
+ the notation &lt;c&gt;[1; 2; 3]&lt;/c&gt;. Use the values in the &lt;c&gt;List&lt;/c&gt; module to manipulate 
+ values of this type, or pattern match against the values directly.
+
+  See also &lt;a href=&quot;https://docs.microsoft.com/dotnet/fsharp/language-reference/lists&quot;&gt;F# Language Guide - Lists&lt;/a&gt;.
+ &lt;/remarks&gt;</em></div>
+<div class="fsdocs-tip" id="fs11">Multiple items<br />val float: value: &#39;T -&gt; float (requires member op_Explicit)<br /><em>&lt;summary&gt;Converts the argument to 64-bit float. This is a direct conversion for all 
+ primitive numeric types. For strings, the input is converted using &lt;c&gt;Double.Parse()&lt;/c&gt;  
+ with InvariantCulture settings. Otherwise the operation requires an appropriate
+ static conversion method on the input type.&lt;/summary&gt;<br />&lt;param name=&quot;value&quot;&gt;The input value.&lt;/param&gt;<br />&lt;returns&gt;The converted float&lt;/returns&gt;<br />&lt;example id=&quot;float-example&quot;&gt;&lt;code lang=&quot;fsharp&quot;&gt;&lt;/code&gt;&lt;/example&gt;</em><br /><br />--------------------<br />[&lt;Struct&gt;]
+type float = System.Double<br /><em>&lt;summary&gt;An abbreviation for the CLI type &lt;see cref=&quot;T:System.Double&quot; /&gt;.&lt;/summary&gt;<br />&lt;category&gt;Basic Types&lt;/category&gt;</em><br /><br />--------------------<br />type float&lt;&#39;Measure&gt; =
+  float<br /><em>&lt;summary&gt;The type of double-precision floating point numbers, annotated with a unit of measure.
+ The unit of measure is erased in compiled code and when values of this type
+ are analyzed using reflection. The type is representationally equivalent to
+ &lt;see cref=&quot;T:System.Double&quot; /&gt;.&lt;/summary&gt;<br />&lt;category index=&quot;6&quot;&gt;Basic Types with Units of Measure&lt;/category&gt;</em></div>
+<div class="fsdocs-tip" id="fs12">Multiple items<br />m&#243;dulo List
+
+de FSharp.Stats<br /><em>&lt;summary&gt;
+ Module to compute common statistical measure on list
+&lt;/summary&gt;</em><br /><br />--------------------<br />m&#243;dulo List
+
+de Microsoft.FSharp.Collections<br /><em>&lt;summary&gt;Contains operations for working with values of type &lt;see cref=&quot;T:Microsoft.FSharp.Collections.list`1&quot; /&gt;.&lt;/summary&gt;<br />&lt;namespacedoc&gt;&lt;summary&gt;Operations for collections such as lists, arrays, sets, maps and sequences. See also 
+    &lt;a href=&quot;https://docs.microsoft.com/dotnet/fsharp/language-reference/fsharp-collection-types&quot;&gt;F# Collection Types&lt;/a&gt; in the F# Language Guide.
+ &lt;/summary&gt;&lt;/namespacedoc&gt;</em><br /><br />--------------------<br />type List&lt;&#39;T&gt; =
+  | op_Nil
+  | op_ColonColon of Head: &#39;T * Tail: &#39;T list
+  interface IReadOnlyList&lt;&#39;T&gt;
+  interface IReadOnlyCollection&lt;&#39;T&gt;
+  interface IEnumerable
+  interface IEnumerable&lt;&#39;T&gt;
+  member GetReverseIndex: rank: int * offset: int -&gt; int
+  member GetSlice: startIndex: int option * endIndex: int option -&gt; &#39;T list
+  static member Cons: head: &#39;T * tail: &#39;T list -&gt; &#39;T list
+  member Head: &#39;T
+  member IsEmpty: bool
+  member Item: index: int -&gt; &#39;T with get
+  ...<br /><em>&lt;summary&gt;The type of immutable singly-linked lists.&lt;/summary&gt;<br />&lt;remarks&gt;Use the constructors &lt;c&gt;[]&lt;/c&gt; and &lt;c&gt;::&lt;/c&gt; (infix) to create values of this type, or
+ the notation &lt;c&gt;[1;2;3]&lt;/c&gt;. Use the values in the &lt;c&gt;List&lt;/c&gt; module to manipulate 
+ values of this type, or pattern match against the values directly.
+ &lt;/remarks&gt;<br />&lt;exclude /&gt;</em></div>
+<div class="fsdocs-tip" id="fs13">val zip: list1: &#39;T1 list -&gt; list2: &#39;T2 list -&gt; (&#39;T1 * &#39;T2) list<br /><em>&lt;summary&gt;Combines the two lists into a list of pairs. The two lists must have equal lengths.&lt;/summary&gt;<br />&lt;param name=&quot;list1&quot;&gt;The first input list.&lt;/param&gt;<br />&lt;param name=&quot;list2&quot;&gt;The second input list.&lt;/param&gt;<br />&lt;returns&gt;A single list containing pairs of matching elements from the input lists.&lt;/returns&gt;<br />&lt;example id=&quot;zip-1&quot;&gt;&lt;code lang=&quot;fsharp&quot;&gt;
+ let numbers = [1; 2]
+ let names = [&quot;one&quot;; &quot;two&quot;]
+
+ List.zip numbers names
+ &lt;/code&gt;
+ Evaluates to &lt;c&gt;[(1, &quot;one&quot;); (2, &quot;two&quot;)]&lt;/c&gt;.
+ &lt;/example&gt;</em></div>
+<div class="fsdocs-tip" id="fs14">val map: mapping: (&#39;T -&gt; &#39;U) -&gt; list: &#39;T list -&gt; &#39;U list<br /><em>&lt;summary&gt;Builds a new collection whose elements are the results of applying the given function
+ to each of the elements of the collection.&lt;/summary&gt;<br />&lt;param name=&quot;mapping&quot;&gt;The function to transform elements from the input list.&lt;/param&gt;<br />&lt;param name=&quot;list&quot;&gt;The input list.&lt;/param&gt;<br />&lt;returns&gt;The list of transformed elements.&lt;/returns&gt;<br />&lt;example id=&quot;map-1&quot;&gt;&lt;code lang=&quot;fsharp&quot;&gt;
+ let inputs = [ &quot;a&quot;; &quot;bbb&quot;; &quot;cc&quot; ]
+
+ inputs |&amp;gt; List.map (fun x -&amp;gt; x.Length)
+ &lt;/code&gt;
+ Evaluates to &lt;c&gt;[ 1; 3; 2 ]&lt;/c&gt;&lt;/example&gt;</em></div>
+<div class="fsdocs-tip" id="fs15">val likelihood_i: float</div>
+<div class="fsdocs-tip" id="fs16">val prior_i: float</div>
+<div class="fsdocs-tip" id="fs17">val unstandardizedPosterior: float list</div>
+<div class="fsdocs-tip" id="fs18">val sum: float</div>
+<div class="fsdocs-tip" id="fs19">val sum: list: &#39;T list -&gt; &#39;T (requires member (+) and member get_Zero)<br /><em>&lt;summary&gt;Returns the sum of the elements in the list.&lt;/summary&gt;<br />&lt;param name=&quot;list&quot;&gt;The input list.&lt;/param&gt;<br />&lt;returns&gt;The resulting sum.&lt;/returns&gt;<br />&lt;example id=&quot;sum-1&quot;&gt;&lt;code lang=&quot;fsharp&quot;&gt;
+ let input = [ 1; 5; 3; 2 ]
+
+ input |&amp;gt; List.sum
+ &lt;/code&gt;
+ Evaluates to &lt;c&gt;11&lt;/c&gt;.
+ &lt;/example&gt;</em></div>
+<div class="fsdocs-tip" id="fs20">val xs: float</div>
+<div class="fsdocs-tip" id="fs21">val gridApproximationFig: probas: float list -&gt; prior: float list -&gt; likelihood: float list -&gt; GenericChart.GenericChart</div>
+<div class="fsdocs-tip" id="fs22">val probas: float list</div>
+<div class="fsdocs-tip" id="fs23">m&#243;dulo GenericChart
+
+de Plotly.NET<br /><em>&lt;summary&gt;
+ Module to represent a GenericChart
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs24">type GenericChart =
+  | Chart of Trace * Layout * Config * DisplayOptions
+  | MultiChart of Trace list * Layout * Config * DisplayOptions</div>
+<div class="fsdocs-tip" id="fs25">type Chart =
+  static member AnnotatedHeatmap: zData: seq&lt;#seq&lt;&#39;a1&gt;&gt; * annotationText: seq&lt;#seq&lt;string&gt;&gt; * ?Name: string * ?ShowLegend: bool * ?Opacity: float * ?X: seq&lt;#IConvertible&gt; * ?XGap: int * ?Y: seq&lt;#IConvertible&gt; * ?YGap: int * ?Text: &#39;a5 * ?MultiText: seq&lt;&#39;a5&gt; * ?ColorBar: ColorBar * ?ColorScale: Colorscale * ?ShowScale: bool * ?ReverseScale: bool * ?ZSmooth: SmoothAlg * ?Transpose: bool * ?UseWebGL: bool * ?ReverseYAxis: bool * ?UseDefaults: bool -&gt; GenericChart (requires &#39;a1 :&gt; IConvertible and &#39;a5 :&gt; IConvertible) + 1 sobrecarga
+  static member Area: x: seq&lt;#IConvertible&gt; * y: seq&lt;#IConvertible&gt; * ?ShowMarkers: bool * ?Name: string * ?ShowLegend: bool * ?Opacity: float * ?MultiOpacity: seq&lt;float&gt; * ?Text: &#39;a2 * ?MultiText: seq&lt;&#39;a2&gt; * ?TextPosition: TextPosition * ?MultiTextPosition: seq&lt;TextPosition&gt; * ?MarkerColor: Color * ?MarkerColorScale: Colorscale * ?MarkerOutline: Line * ?MarkerSymbol: MarkerSymbol * ?MultiMarkerSymbol: seq&lt;MarkerSymbol&gt; * ?Marker: Marker * ?LineColor: Color * ?LineColorScale: Colorscale * ?LineWidth: float * ?LineDash: DrawingStyle * ?Line: Line * ?StackGroup: string * ?Orientation: Orientation * ?GroupNorm: GroupNorm * ?FillColor: Color * ?UseWebGL: bool * ?UseDefaults: bool -&gt; GenericChart (requires &#39;a2 :&gt; IConvertible) + 1 sobrecarga
+  static member Bar: values: seq&lt;#IConvertible&gt; * ?Keys: seq&lt;#IConvertible&gt; * ?Name: string * ?ShowLegend: bool * ?Opacity: float * ?MultiOpacity: seq&lt;float&gt; * ?Text: &#39;a2 * ?MultiText: seq&lt;&#39;a2&gt; * ?MarkerColor: Color * ?MarkerColorScale: Colorscale * ?MarkerOutline: Line * ?MarkerPatternShape: PatternShape * ?MultiMarkerPatternShape: seq&lt;PatternShape&gt; * ?MarkerPattern: Pattern * ?Marker: Marker * ?Base: #IConvertible * ?Width: &#39;a4 * ?MultiWidth: seq&lt;&#39;a4&gt; * ?TextPosition: TextPosition * ?MultiTextPosition: seq&lt;TextPosition&gt; * ?UseDefaults: bool -&gt; GenericChart (requires &#39;a2 :&gt; IConvertible and &#39;a4 :&gt; IConvertible) + 1 sobrecarga
+  static member BoxPlot: ?X: seq&lt;#IConvertible&gt; * ?Y: seq&lt;#IConvertible&gt; * ?Name: string * ?ShowLegend: bool * ?Text: &#39;a2 * ?MultiText: seq&lt;&#39;a2&gt; * ?FillColor: Color * ?MarkerColor: Color * ?Marker: Marker * ?Opacity: float * ?WhiskerWidth: float * ?BoxPoints: BoxPoints * ?BoxMean: BoxMean * ?Jitter: float * ?PointPos: float * ?Orientation: Orientation * ?OutlineColor: Color * ?OutlineWidth: float * ?Outline: Line * ?AlignmentGroup: string * ?OffsetGroup: string * ?Notched: bool * ?NotchWidth: float * ?QuartileMethod: QuartileMethod * ?UseDefaults: bool -&gt; GenericChart (requires &#39;a2 :&gt; IConvertible) + 2 sobrecargas
+  static member Bubble: x: seq&lt;#IConvertible&gt; * y: seq&lt;#IConvertible&gt; * sizes: seq&lt;int&gt; * ?Name: string * ?ShowLegend: bool * ?Opacity: float * ?MultiOpacity: seq&lt;float&gt; * ?Text: &#39;a2 * ?MultiText: seq&lt;&#39;a2&gt; * ?TextPosition: TextPosition * ?MultiTextPosition: seq&lt;TextPosition&gt; * ?MarkerColor: Color * ?MarkerColorScale: Colorscale * ?MarkerOutline: Line * ?MarkerSymbol: MarkerSymbol * ?MultiMarkerSymbol: seq&lt;MarkerSymbol&gt; * ?Marker: Marker * ?LineColor: Color * ?LineColorScale: Colorscale * ?LineWidth: float * ?LineDash: DrawingStyle * ?Line: Line * ?StackGroup: string * ?Orientation: Orientation * ?GroupNorm: GroupNorm * ?UseWebGL: bool * ?UseDefaults: bool -&gt; GenericChart (requires &#39;a2 :&gt; IConvertible) + 1 sobrecarga
+  static member Candlestick: ``open`` : seq&lt;#IConvertible&gt; * high: seq&lt;#IConvertible&gt; * low: seq&lt;#IConvertible&gt; * close: seq&lt;#IConvertible&gt; * x: seq&lt;#IConvertible&gt; * ?Name: string * ?ShowLegend: bool * ?Opacity: float * ?Text: &#39;a5 * ?MultiText: seq&lt;&#39;a5&gt; * ?Line: Line * ?IncreasingColor: Color * ?Increasing: FinanceMarker * ?DecreasingColor: Color * ?Decreasing: FinanceMarker * ?WhiskerWidth: float * ?UseDefaults: bool -&gt; GenericChart (requires &#39;a5 :&gt; IConvertible) + 1 sobrecarga
+  static member Column: values: seq&lt;#IConvertible&gt; * ?Keys: seq&lt;#IConvertible&gt; * ?Name: string * ?ShowLegend: bool * ?Opacity: float * ?MultiOpacity: seq&lt;float&gt; * ?Text: &#39;a2 * ?MultiText: seq&lt;&#39;a2&gt; * ?MarkerColor: Color * ?MarkerColorScale: Colorscale * ?MarkerOutline: Line * ?MarkerPatternShape: PatternShape * ?MultiMarkerPatternShape: seq&lt;PatternShape&gt; * ?MarkerPattern: Pattern * ?Marker: Marker * ?Base: #IConvertible * ?Width: &#39;a4 * ?MultiWidth: seq&lt;&#39;a4&gt; * ?TextPosition: TextPosition * ?MultiTextPosition: seq&lt;TextPosition&gt; * ?UseDefaults: bool -&gt; GenericChart (requires &#39;a2 :&gt; IConvertible and &#39;a4 :&gt; IConvertible) + 1 sobrecarga
+  static member Contour: zData: seq&lt;#seq&lt;&#39;a1&gt;&gt; * ?Name: string * ?ShowLegend: bool * ?Opacity: float * ?X: seq&lt;#IConvertible&gt; * ?Y: seq&lt;#IConvertible&gt; * ?Text: &#39;a4 * ?MultiText: seq&lt;&#39;a4&gt; * ?ColorBar: ColorBar * ?ColorScale: Colorscale * ?ShowScale: bool * ?ReverseScale: bool * ?Transpose: bool * ?ContourLineColor: Color * ?ContourLineDash: DrawingStyle * ?ContourLineSmoothing: float * ?ContourLine: Line * ?ContoursColoring: ContourColoring * ?ContoursOperation: ConstraintOperation * ?ContoursType: ContourType * ?ShowContourLabels: bool * ?ContourLabelFont: Font * ?Contours: Contours * ?FillColor: Color * ?NContours: int * ?UseDefaults: bool -&gt; GenericChart (requires &#39;a1 :&gt; IConvertible and &#39;a4 :&gt; IConvertible)
+  static member Funnel: x: seq&lt;#IConvertible&gt; * y: seq&lt;#IConvertible&gt; * ?Name: string * ?ShowLegend: bool * ?Opacity: float * ?Width: float * ?Offset: float * ?Text: &#39;a2 * ?MultiText: seq&lt;&#39;a2&gt; * ?TextPosition: TextPosition * ?MultiTextPosition: seq&lt;TextPosition&gt; * ?Orientation: Orientation * ?AlignmentGroup: string * ?OffsetGroup: string * ?MarkerColor: Color * ?MarkerOutline: Line * ?Marker: Marker * ?TextInfo: TextInfo * ?ConnectorLineColor: Color * ?ConnectorLineStyle: DrawingStyle * ?ConnectorFillColor: Color * ?ConnectorLine: Line * ?Connector: FunnelConnector * ?InsideTextFont: Font * ?OutsideTextFont: Font * ?UseDefaults: bool -&gt; GenericChart (requires &#39;a2 :&gt; IConvertible)
+  static member Heatmap: zData: seq&lt;#seq&lt;&#39;a1&gt;&gt; * ?Name: string * ?ShowLegend: bool * ?Opacity: float * ?X: seq&lt;#IConvertible&gt; * ?XGap: int * ?Y: seq&lt;#IConvertible&gt; * ?YGap: int * ?Text: &#39;a4 * ?MultiText: seq&lt;&#39;a4&gt; * ?ColorBar: ColorBar * ?ColorScale: Colorscale * ?ShowScale: bool * ?ReverseScale: bool * ?ZSmooth: SmoothAlg * ?Transpose: bool * ?UseWebGL: bool * ?ReverseYAxis: bool * ?UseDefaults: bool -&gt; GenericChart (requires &#39;a1 :&gt; IConvertible and &#39;a4 :&gt; IConvertible) + 1 sobrecarga
+  ...</div>
+<div class="fsdocs-tip" id="fs26">static member Chart.Line: xy: seq&lt;#System.IConvertible * #System.IConvertible&gt; * ?ShowMarkers: bool * ?Name: string * ?ShowLegend: bool * ?Opacity: float * ?MultiOpacity: seq&lt;float&gt; * ?Text: &#39;a2 * ?MultiText: seq&lt;&#39;a2&gt; * ?TextPosition: StyleParam.TextPosition * ?MultiTextPosition: seq&lt;StyleParam.TextPosition&gt; * ?MarkerColor: Color * ?MarkerColorScale: StyleParam.Colorscale * ?MarkerOutline: Line * ?MarkerSymbol: StyleParam.MarkerSymbol * ?MultiMarkerSymbol: seq&lt;StyleParam.MarkerSymbol&gt; * ?Marker: TraceObjects.Marker * ?LineColor: Color * ?LineColorScale: StyleParam.Colorscale * ?LineWidth: float * ?LineDash: StyleParam.DrawingStyle * ?Line: Line * ?StackGroup: string * ?Orientation: StyleParam.Orientation * ?GroupNorm: StyleParam.GroupNorm * ?Fill: StyleParam.Fill * ?FillColor: Color * ?UseWebGL: bool * ?UseDefaults: bool -&gt; GenericChart.GenericChart (requires &#39;a2 :&gt; System.IConvertible)<br />static member Chart.Line: x: seq&lt;#System.IConvertible&gt; * y: seq&lt;#System.IConvertible&gt; * ?ShowMarkers: bool * ?Name: string * ?ShowLegend: bool * ?Opacity: float * ?MultiOpacity: seq&lt;float&gt; * ?Text: &#39;c * ?MultiText: seq&lt;&#39;c&gt; * ?TextPosition: StyleParam.TextPosition * ?MultiTextPosition: seq&lt;StyleParam.TextPosition&gt; * ?MarkerColor: Color * ?MarkerColorScale: StyleParam.Colorscale * ?MarkerOutline: Line * ?MarkerSymbol: StyleParam.MarkerSymbol * ?MultiMarkerSymbol: seq&lt;StyleParam.MarkerSymbol&gt; * ?Marker: TraceObjects.Marker * ?LineColor: Color * ?LineColorScale: StyleParam.Colorscale * ?LineWidth: float * ?LineDash: StyleParam.DrawingStyle * ?Line: Line * ?StackGroup: string * ?Orientation: StyleParam.Orientation * ?GroupNorm: StyleParam.GroupNorm * ?Fill: StyleParam.Fill * ?FillColor: Color * ?UseWebGL: bool * ?UseDefaults: bool -&gt; GenericChart.GenericChart (requires &#39;c :&gt; System.IConvertible)</div>
+<div class="fsdocs-tip" id="fs27">static member Chart.Grid: ?SubPlots: (StyleParam.LinearAxisId * StyleParam.LinearAxisId)[][] * ?XAxes: StyleParam.LinearAxisId[] * ?YAxes: StyleParam.LinearAxisId[] * ?RowOrder: StyleParam.LayoutGridRowOrder * ?Pattern: StyleParam.LayoutGridPattern * ?XGap: float * ?YGap: float * ?Domain: LayoutObjects.Domain * ?XSide: StyleParam.LayoutGridXSide * ?YSide: StyleParam.LayoutGridYSide -&gt; (#seq&lt;&#39;a1&gt; -&gt; GenericChart.GenericChart) (requires &#39;a1 :&gt; seq&lt;GenericChart.GenericChart&gt;)<br />static member Chart.Grid: nRows: int * nCols: int * ?SubPlots: (StyleParam.LinearAxisId * StyleParam.LinearAxisId)[][] * ?XAxes: StyleParam.LinearAxisId[] * ?YAxes: StyleParam.LinearAxisId[] * ?RowOrder: StyleParam.LayoutGridRowOrder * ?Pattern: StyleParam.LayoutGridPattern * ?XGap: float * ?YGap: float * ?Domain: LayoutObjects.Domain * ?XSide: StyleParam.LayoutGridXSide * ?YSide: StyleParam.LayoutGridYSide -&gt; (#seq&lt;GenericChart.GenericChart&gt; -&gt; GenericChart.GenericChart)</div>
+<div class="fsdocs-tip" id="fs28">static member Chart.withTitle: title: Title -&gt; (GenericChart.GenericChart -&gt; GenericChart.GenericChart)<br />static member Chart.withTitle: title: string * ?TitleFont: Font -&gt; (GenericChart.GenericChart -&gt; GenericChart.GenericChart)</div>
+<div class="fsdocs-tip" id="fs29">Propriedade. List.Length: int with get<br /><em>&lt;summary&gt;Gets the number of items contained in the list&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs30">static member Chart.withYAxisStyle: ?TitleText: string * ?TitleFont: Font * ?TitleStandoff: int * ?Title: Title * ?Color: Color * ?AxisType: StyleParam.AxisType * ?MinMax: (#System.IConvertible * #System.IConvertible) * ?Mirror: StyleParam.Mirror * ?ShowSpikes: bool * ?SpikeColor: Color * ?SpikeThickness: int * ?ShowLine: bool * ?LineColor: Color * ?ShowGrid: bool * ?GridColor: Color * ?ZeroLine: bool * ?ZeroLineColor: Color * ?Anchor: StyleParam.LinearAxisId * ?Side: StyleParam.Side * ?Overlaying: StyleParam.LinearAxisId * ?Domain: (float * float) * ?Position: float * ?CategoryOrder: StyleParam.CategoryOrder * ?CategoryArray: seq&lt;#System.IConvertible&gt; * ?RangeSlider: LayoutObjects.RangeSlider * ?RangeSelector: LayoutObjects.RangeSelector * ?BackgroundColor: Color * ?ShowBackground: bool * ?Id: StyleParam.SubPlotId -&gt; (GenericChart.GenericChart -&gt; GenericChart.GenericChart)</div>
+<div class="fsdocs-tip" id="fs31">static member Chart.withSize: width: float * height: float -&gt; (GenericChart.GenericChart -&gt; GenericChart.GenericChart)<br />static member Chart.withSize: ?Width: int * ?Height: int -&gt; (GenericChart.GenericChart -&gt; GenericChart.GenericChart)</div>
+<div class="fsdocs-tip" id="fs32">val n: float</div>
+<div class="fsdocs-tip" id="fs33">val flatPrior: float list</div>
+<div class="fsdocs-tip" id="fs34">val p: float</div>
+<div class="fsdocs-tip" id="fs35">m&#243;dulo Discrete
+
+de FSharp.Stats.Distributions<br /><em>&lt;summary&gt;
+ Discrete probability distributions
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs36">val binomial: p: float -&gt; n: int -&gt; Distribution&lt;float,int&gt;<br /><em>&lt;summary&gt;
+ Initializes a Binomial distribution       
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs37">val multiGridApproximationFig: priorFunc: (float -&gt; float) -&gt; points: int list -&gt; nTrials: int -&gt; nSucesses: int -&gt; GenericChart.GenericChart</div>
+<div class="fsdocs-tip" id="fs38">val priorFunc: (float -&gt; float)</div>
+<div class="fsdocs-tip" id="fs39">val points: int list</div>
+<div class="fsdocs-tip" id="fs40">Multiple items<br />val int: value: &#39;T -&gt; int (requires member op_Explicit)<br /><em>&lt;summary&gt;Converts the argument to signed 32-bit integer. This is a direct conversion for all 
+ primitive numeric types. For strings, the input is converted using &lt;c&gt;Int32.Parse()&lt;/c&gt;  
+ with InvariantCulture settings. Otherwise the operation requires an appropriate
+ static conversion method on the input type.&lt;/summary&gt;<br />&lt;param name=&quot;value&quot;&gt;The input value.&lt;/param&gt;<br />&lt;returns&gt;The converted int&lt;/returns&gt;<br />&lt;example id=&quot;int-example&quot;&gt;&lt;code lang=&quot;fsharp&quot;&gt;&lt;/code&gt;&lt;/example&gt;</em><br /><br />--------------------<br />[&lt;Struct&gt;]
+type int = int32<br /><em>&lt;summary&gt;An abbreviation for the CLI type &lt;see cref=&quot;T:System.Int32&quot; /&gt;.&lt;/summary&gt;<br />&lt;category&gt;Basic Types&lt;/category&gt;</em><br /><br />--------------------<br />type int&lt;&#39;Measure&gt; =
+  int<br /><em>&lt;summary&gt;The type of 32-bit signed integer numbers, annotated with a unit of measure. The unit
+ of measure is erased in compiled code and when values of this type
+ are analyzed using reflection. The type is representationally equivalent to
+ &lt;see cref=&quot;T:System.Int32&quot; /&gt;.&lt;/summary&gt;<br />&lt;category&gt;Basic Types with Units of Measure&lt;/category&gt;</em></div>
+<div class="fsdocs-tip" id="fs41">val nTrials: int</div>
+<div class="fsdocs-tip" id="fs42">val nSucesses: int</div>
+<div class="fsdocs-tip" id="fs43">val nPointsToEstimate: int</div>
+<div class="fsdocs-tip" id="fs44">val unzip: list: (&#39;T1 * &#39;T2) list -&gt; &#39;T1 list * &#39;T2 list<br /><em>&lt;summary&gt;Splits a list of pairs into two lists.&lt;/summary&gt;<br />&lt;param name=&quot;list&quot;&gt;The input list.&lt;/param&gt;<br />&lt;returns&gt;Two lists of split elements.&lt;/returns&gt;<br />&lt;example id=&quot;unzip-1&quot;&gt;&lt;code lang=&quot;fsharp&quot;&gt;
+ let inputs = [(1, &quot;one&quot;); (2, &quot;two&quot;)]
+
+ let numbers, names = inputs |&amp;gt; List.unzip
+ &lt;/code&gt;
+ Evaluates &lt;c&gt;numbers&lt;/c&gt; to &lt;c&gt;[1; 2]&lt;/c&gt; and &lt;c&gt;names&lt;/c&gt; to &lt;c&gt;[&quot;one&quot;; &quot;two&quot;]&lt;/c&gt;.
+ &lt;/example&gt;</em></div>
+<div class="fsdocs-tip" id="fs45">static member Chart.combine: gCharts: seq&lt;GenericChart.GenericChart&gt; -&gt; GenericChart.GenericChart</div>
+<div class="fsdocs-tip" id="fs46">static member Chart.withXAxisStyle: ?TitleText: string * ?TitleFont: Font * ?TitleStandoff: int * ?Title: Title * ?Color: Color * ?AxisType: StyleParam.AxisType * ?MinMax: (#System.IConvertible * #System.IConvertible) * ?Mirror: StyleParam.Mirror * ?ShowSpikes: bool * ?SpikeColor: Color * ?SpikeThickness: int * ?ShowLine: bool * ?LineColor: Color * ?ShowGrid: bool * ?GridColor: Color * ?ZeroLine: bool * ?ZeroLineColor: Color * ?Anchor: StyleParam.LinearAxisId * ?Side: StyleParam.Side * ?Overlaying: StyleParam.LinearAxisId * ?Domain: (float * float) * ?Position: float * ?CategoryOrder: StyleParam.CategoryOrder * ?CategoryArray: seq&lt;#System.IConvertible&gt; * ?RangeSlider: LayoutObjects.RangeSlider * ?RangeSelector: LayoutObjects.RangeSelector * ?BackgroundColor: Color * ?ShowBackground: bool * ?Id: StyleParam.SubPlotId -&gt; (GenericChart.GenericChart -&gt; GenericChart.GenericChart)</div>
+<div class="fsdocs-tip" id="fs47">val x: float</div>
+<div class="fsdocs-tip" id="fs48">val a: GenericChart.GenericChart</div>
+<div class="fsdocs-tip" id="fs49">val prLandGivenEarth: float</div>
+<div class="fsdocs-tip" id="fs50">val prLandGivenMars: float</div>
+<div class="fsdocs-tip" id="fs51">val prEarth: float</div>
+<div class="fsdocs-tip" id="fs52">val prMars: float</div>
+<div class="fsdocs-tip" id="fs53">val prLand: float</div>
+<div class="fsdocs-tip" id="fs54">val prEarthGivenLand: float</div>
+
+        </div>
+
+        <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+        <script type="text/javascript">var fsdocs_search_baseurl = '/SharpRethinking/';</script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.8/lunr.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.min.js"></script>
+        <script type="text/javascript" src="/SharpRethinking/content/fsdocs-search.js"></script>
+        <!-- END SEARCH BOX: this adds support for the search box -->
+    </div>
+</body>
+
+</html>

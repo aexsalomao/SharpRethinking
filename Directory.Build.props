@@ -7,7 +7,7 @@
     <RepositoryUrl>https://github.com/aexsalomao/SharpRethinking</RepositoryUrl>
     <PackageProjectUrl>https://aexsalomao.github.io/SharpRethinking/</PackageProjectUrl>
     <FsDocsLicenseLink>"https://github.com/aexsalomao/SharpRethinking/blob/main/LICENSE.md"</FsDocsLicenseLink>
-    <FsDocsRepositoryLink>"https://github.com/aexsalomao/SharpRethinking"</FsDocsRepositoryLink>
+    <FsDocsRepositoryLink>"https://github.com/aexsalomao/SharpRethinking/tree/master/docs"</FsDocsRepositoryLink>
     <PackageIconUrl></PackageIconUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryType>git</RepositoryType>

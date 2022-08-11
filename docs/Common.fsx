@@ -39,14 +39,14 @@ module GridApproximation =
     let multiBinominalPosteriorFig priorFunc points nTrials nSuccesses = 
         points
         |> Seq.map (fun xs -> 
-            let probas = [|0. .. (1. / (float xs - 1.)) .. 1.|]
+            let probas = Generate.LinearSpaced(xs, 0., 1.)
             let prior = probas|> Array.map priorFunc
             Chart.Line(probas, binomialPosterior prior nTrials nSuccesses, Name = $"# Grid Points: {probas.Length}"))
         |> Chart.combine
-        |> Chart.withTitle("Grid approximate posterior distribution")
-        |> Chart.withXAxisStyle("Proportion of water (parameter p)", MinMax=(0., 1.))
+        |> Chart.withTitle("Grid approximation - Posterior Distribution")
+        |> Chart.withXAxisStyle("Parameter p", MinMax=(0., 1.))
         |> Chart.withYAxisStyle("Posterior probability")
-        |> Chart.withSize(650., 650.)
+        |> Chart.withSize(1000., 500.)
 
 module NumpyUtils = 
     let toNDarray (xs : seq<_>) : NDarray = 

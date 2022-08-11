@@ -250,8 +250,10 @@ let pointEstimateAndlossFuncComparisonFig =
     |> Chart.Grid(1, 3)
     |> Chart.withSize(1800., 500.)
     |> Chart.withTitle(chartTitle)
-    |> Chart.show
+    |> GenericChart.toChartHTML
 
+pointEstimateAndlossFuncComparisonFig
+(*** include-it-raw ***)
 (**
 Sampling to simulate prediction
 *)

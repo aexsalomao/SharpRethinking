@@ -71,14 +71,6 @@
                 <li class="nav-item" id="fsdocs-release-notes-link"><a class="nav-link" href="{{fsdocs-release-notes-link}}">Release Notes</a></li>
                 <li class="nav-item" id="fsdocs-repository-link"><a class="nav-link" href="{{fsdocs-repository-link}}">Source Repository</a></li>
                 <li class="nav-header">
-  Practice
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/Ch02.html">
-    Chapter 2: Small Worlds and Large Worlds
-  </a>
-</li>             
-<li class="nav-header">
   Scripts
 </li>             
 <li class="nav-item">
@@ -89,6 +81,14 @@
 <li class="nav-item">
   <a class="nav-link" href="http://localhost:8901/Ch03.html">
     Chapter 3
+  </a>
+</li>             
+<li class="nav-header">
+  Practice
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="http://localhost:8901/Ch02.html">
+    Chapter 2: Small Worlds and Large Worlds
   </a>
 </li>
                 {{fsdocs-list-of-namespaces}}
@@ -174,9 +174,9 @@ type float = System.Double<br /><em>&lt;summary&gt;An abbreviation for the CLI t
  are analyzed using reflection. The type is representationally equivalent to
  &lt;see cref=&quot;T:System.Double&quot; /&gt;.&lt;/summary&gt;<br />&lt;category index=&quot;6&quot;&gt;Basic Types with Units of Measure&lt;/category&gt;</em></div>
 <div class="fsdocs-tip" id="fs13">val unstandardizedPosterior: float[]</div>
-<div class="fsdocs-tip" id="fs14">m&#243;dulo Array
+<div class="fsdocs-tip" id="fs14">module Array
 
-de Microsoft.FSharp.Collections<br /><em>&lt;summary&gt;Contains operations for working with arrays.&lt;/summary&gt;<br />&lt;remarks&gt;
+from Microsoft.FSharp.Collections<br /><em>&lt;summary&gt;Contains operations for working with arrays.&lt;/summary&gt;<br />&lt;remarks&gt;
   See also &lt;a href=&quot;https://docs.microsoft.com/dotnet/fsharp/language-reference/arrays&quot;&gt;F# Language Guide - Arrays&lt;/a&gt;.
  &lt;/remarks&gt;</em></div>
 <div class="fsdocs-tip" id="fs15">val zip: array1: &#39;T1[] -&gt; array2: &#39;T2[] -&gt; (&#39;T1 * &#39;T2)[]<br /><em>&lt;summary&gt;Combines the two arrays into an array of pairs. The two arrays must have equal lengths, otherwise an &lt;c&gt;ArgumentException&lt;/c&gt; is
@@ -214,17 +214,17 @@ de Microsoft.FSharp.Collections<br /><em>&lt;summary&gt;Contains operations for 
   static member FibonacciSequence: unit -&gt; IEnumerable&lt;BigInteger&gt;
   static member Impulse: length: int * amplitude: float * delay: int -&gt; float[]
   static member ImpulseSequence: amplitude: float * delay: int -&gt; IEnumerable&lt;float&gt;
-  static member LinearRange: start: int * stop: int -&gt; float[] + 2 sobrecargas
-  static member LinearRangeInt32: start: int * stop: int -&gt; int[] + 1 sobrecarga
+  static member LinearRange: start: int * stop: int -&gt; float[] + 2 overloads
+  static member LinearRangeInt32: start: int * stop: int -&gt; int[] + 1 overload
   static member LinearRangeMap&lt;&#39;T&gt; : start: float * step: float * stop: float * map: Func&lt;float,&#39;T&gt; -&gt; &#39;T[]
   static member LinearSpaced: length: int * start: float * stop: float -&gt; float[]
   static member LinearSpacedMap&lt;&#39;T&gt; : length: int * start: float * stop: float * map: Func&lt;float,&#39;T&gt; -&gt; &#39;T[]
   static member LogSpaced: length: int * startExponent: float * stopExponent: float -&gt; float[]
   ...</div>
 <div class="fsdocs-tip" id="fs26">Generate.LinearSpaced(length: int, start: float, stop: float) : float[]</div>
-<div class="fsdocs-tip" id="fs27">m&#243;dulo Seq
+<div class="fsdocs-tip" id="fs27">module Seq
 
-de Microsoft.FSharp.Collections<br /><em>&lt;summary&gt;Contains operations for working with values of type &lt;see cref=&quot;T:Microsoft.FSharp.Collections.seq`1&quot; /&gt;.&lt;/summary&gt;</em></div>
+from Microsoft.FSharp.Collections<br /><em>&lt;summary&gt;Contains operations for working with values of type &lt;see cref=&quot;T:Microsoft.FSharp.Collections.seq`1&quot; /&gt;.&lt;/summary&gt;</em></div>
 <div class="fsdocs-tip" id="fs28">val length: source: seq&lt;&#39;T&gt; -&gt; int<br /><em>&lt;summary&gt;Returns the length of the sequence&lt;/summary&gt;<br />&lt;param name=&quot;source&quot;&gt;The input sequence.&lt;/param&gt;<br />&lt;returns&gt;The length of the sequence.&lt;/returns&gt;<br />&lt;exception cref=&quot;T:System.ArgumentNullException&quot;&gt;Thrown when the input sequence is null.&lt;/exception&gt;<br />&lt;example id=&quot;item-1&quot;&gt;&lt;code lang=&quot;fsharp&quot;&gt;
  let inputs = [&quot;a&quot;; &quot;b&quot;; &quot;c&quot;]
 
@@ -235,12 +235,12 @@ de Microsoft.FSharp.Collections<br /><em>&lt;summary&gt;Contains operations for 
   interface IDiscreteDistribution
   interface IUnivariateDistribution
   interface IDistribution
-  new: p: float * n: int -&gt; unit + 1 sobrecarga
+  new: p: float * n: int -&gt; unit + 1 overload
   member CumulativeDistribution: x: float -&gt; float
   member Probability: k: int -&gt; float
   member ProbabilityLn: k: int -&gt; float
-  member Sample: unit -&gt; int + 2 sobrecargas
-  member Samples: values: int[] -&gt; unit + 5 sobrecargas
+  member Sample: unit -&gt; int + 2 overloads
+  member Samples: values: int[] -&gt; unit + 5 overloads
   member ToString: unit -&gt; string
   ...<br /><em>&lt;summary&gt;
             Discrete Univariate Binomial distribution.
@@ -250,13 +250,13 @@ de Microsoft.FSharp.Collections<br /><em>&lt;summary&gt;Contains operations for 
             The distribution is parameterized by a probability (between 0.0 and 1.0).
             &lt;/remarks&gt;</em><br /><br />--------------------<br />Binomial(p: float, n: int) : Binomial<br />Binomial(p: float, n: int, randomSource: System.Random) : Binomial</div>
 <div class="fsdocs-tip" id="fs30">Binomial.PMF(p: float, n: int, k: int) : float</div>
-<div class="fsdocs-tip" id="fs31">Argumento p: float<br /><em>&lt;summary&gt;
+<div class="fsdocs-tip" id="fs31">argument p: float<br /><em>&lt;summary&gt;
             Computes the probability mass (PMF) at k, i.e. P(X = k).
             &lt;/summary&gt;<br />&lt;param name=&quot;k&quot;&gt;The location in the domain where we want to evaluate the probability mass function.&lt;/param&gt;<br />&lt;param name=&quot;p&quot;&gt;The success probability (p) in each trial. Range: 0 ≤ p ≤ 1.&lt;/param&gt;<br />&lt;param name=&quot;n&quot;&gt;The number of trials (n). Range: n ≥ 0.&lt;/param&gt;<br />&lt;returns&gt;the probability mass at location &lt;paramref name=&quot;k&quot; /&gt;.&lt;/returns&gt;</em></div>
-<div class="fsdocs-tip" id="fs32">Argumento n: int<br /><em>&lt;summary&gt;
+<div class="fsdocs-tip" id="fs32">argument n: int<br /><em>&lt;summary&gt;
             Computes the probability mass (PMF) at k, i.e. P(X = k).
             &lt;/summary&gt;<br />&lt;param name=&quot;k&quot;&gt;The location in the domain where we want to evaluate the probability mass function.&lt;/param&gt;<br />&lt;param name=&quot;p&quot;&gt;The success probability (p) in each trial. Range: 0 ≤ p ≤ 1.&lt;/param&gt;<br />&lt;param name=&quot;n&quot;&gt;The number of trials (n). Range: n ≥ 0.&lt;/param&gt;<br />&lt;returns&gt;the probability mass at location &lt;paramref name=&quot;k&quot; /&gt;.&lt;/returns&gt;</em></div>
-<div class="fsdocs-tip" id="fs33">Argumento k: int<br /><em>&lt;summary&gt;
+<div class="fsdocs-tip" id="fs33">argument k: int<br /><em>&lt;summary&gt;
             Computes the probability mass (PMF) at k, i.e. P(X = k).
             &lt;/summary&gt;<br />&lt;param name=&quot;k&quot;&gt;The location in the domain where we want to evaluate the probability mass function.&lt;/param&gt;<br />&lt;param name=&quot;p&quot;&gt;The success probability (p) in each trial. Range: 0 ≤ p ≤ 1.&lt;/param&gt;<br />&lt;param name=&quot;n&quot;&gt;The number of trials (n). Range: n ≥ 0.&lt;/param&gt;<br />&lt;returns&gt;the probability mass at location &lt;paramref name=&quot;k&quot; /&gt;.&lt;/returns&gt;</em></div>
 <div class="fsdocs-tip" id="fs34">val multiBinominalPosteriorFig: priorFunc: (float -&gt; float) -&gt; points: seq&lt;int&gt; -&gt; nTrials: int -&gt; nSuccesses: int -&gt; GenericChart.GenericChart</div>
@@ -275,19 +275,19 @@ de Microsoft.FSharp.Collections<br /><em>&lt;summary&gt;Contains operations for 
 <div class="fsdocs-tip" id="fs38">val xs: int</div>
 <div class="fsdocs-tip" id="fs39">val probas: float[]</div>
 <div class="fsdocs-tip" id="fs40">type Chart =
-  static member AnnotatedHeatmap: zData: seq&lt;#seq&lt;&#39;a1&gt;&gt; * annotationText: seq&lt;#seq&lt;string&gt;&gt; * ?Name: string * ?ShowLegend: bool * ?Opacity: float * ?X: seq&lt;#IConvertible&gt; * ?XGap: int * ?Y: seq&lt;#IConvertible&gt; * ?YGap: int * ?Text: &#39;a5 * ?MultiText: seq&lt;&#39;a5&gt; * ?ColorBar: ColorBar * ?ColorScale: Colorscale * ?ShowScale: bool * ?ReverseScale: bool * ?ZSmooth: SmoothAlg * ?Transpose: bool * ?UseWebGL: bool * ?ReverseYAxis: bool * ?UseDefaults: bool -&gt; GenericChart (requires &#39;a1 :&gt; IConvertible and &#39;a5 :&gt; IConvertible) + 1 sobrecarga
-  static member Area: x: seq&lt;#IConvertible&gt; * y: seq&lt;#IConvertible&gt; * ?ShowMarkers: bool * ?Name: string * ?ShowLegend: bool * ?Opacity: float * ?MultiOpacity: seq&lt;float&gt; * ?Text: &#39;a2 * ?MultiText: seq&lt;&#39;a2&gt; * ?TextPosition: TextPosition * ?MultiTextPosition: seq&lt;TextPosition&gt; * ?MarkerColor: Color * ?MarkerColorScale: Colorscale * ?MarkerOutline: Line * ?MarkerSymbol: MarkerSymbol * ?MultiMarkerSymbol: seq&lt;MarkerSymbol&gt; * ?Marker: Marker * ?LineColor: Color * ?LineColorScale: Colorscale * ?LineWidth: float * ?LineDash: DrawingStyle * ?Line: Line * ?StackGroup: string * ?Orientation: Orientation * ?GroupNorm: GroupNorm * ?FillColor: Color * ?UseWebGL: bool * ?UseDefaults: bool -&gt; GenericChart (requires &#39;a2 :&gt; IConvertible) + 1 sobrecarga
-  static member Bar: values: seq&lt;#IConvertible&gt; * ?Keys: seq&lt;#IConvertible&gt; * ?Name: string * ?ShowLegend: bool * ?Opacity: float * ?MultiOpacity: seq&lt;float&gt; * ?Text: &#39;a2 * ?MultiText: seq&lt;&#39;a2&gt; * ?MarkerColor: Color * ?MarkerColorScale: Colorscale * ?MarkerOutline: Line * ?MarkerPatternShape: PatternShape * ?MultiMarkerPatternShape: seq&lt;PatternShape&gt; * ?MarkerPattern: Pattern * ?Marker: Marker * ?Base: #IConvertible * ?Width: &#39;a4 * ?MultiWidth: seq&lt;&#39;a4&gt; * ?TextPosition: TextPosition * ?MultiTextPosition: seq&lt;TextPosition&gt; * ?UseDefaults: bool -&gt; GenericChart (requires &#39;a2 :&gt; IConvertible and &#39;a4 :&gt; IConvertible) + 1 sobrecarga
-  static member BoxPlot: ?X: seq&lt;#IConvertible&gt; * ?Y: seq&lt;#IConvertible&gt; * ?Name: string * ?ShowLegend: bool * ?Text: &#39;a2 * ?MultiText: seq&lt;&#39;a2&gt; * ?FillColor: Color * ?MarkerColor: Color * ?Marker: Marker * ?Opacity: float * ?WhiskerWidth: float * ?BoxPoints: BoxPoints * ?BoxMean: BoxMean * ?Jitter: float * ?PointPos: float * ?Orientation: Orientation * ?OutlineColor: Color * ?OutlineWidth: float * ?Outline: Line * ?AlignmentGroup: string * ?OffsetGroup: string * ?Notched: bool * ?NotchWidth: float * ?QuartileMethod: QuartileMethod * ?UseDefaults: bool -&gt; GenericChart (requires &#39;a2 :&gt; IConvertible) + 2 sobrecargas
-  static member Bubble: x: seq&lt;#IConvertible&gt; * y: seq&lt;#IConvertible&gt; * sizes: seq&lt;int&gt; * ?Name: string * ?ShowLegend: bool * ?Opacity: float * ?MultiOpacity: seq&lt;float&gt; * ?Text: &#39;a2 * ?MultiText: seq&lt;&#39;a2&gt; * ?TextPosition: TextPosition * ?MultiTextPosition: seq&lt;TextPosition&gt; * ?MarkerColor: Color * ?MarkerColorScale: Colorscale * ?MarkerOutline: Line * ?MarkerSymbol: MarkerSymbol * ?MultiMarkerSymbol: seq&lt;MarkerSymbol&gt; * ?Marker: Marker * ?LineColor: Color * ?LineColorScale: Colorscale * ?LineWidth: float * ?LineDash: DrawingStyle * ?Line: Line * ?StackGroup: string * ?Orientation: Orientation * ?GroupNorm: GroupNorm * ?UseWebGL: bool * ?UseDefaults: bool -&gt; GenericChart (requires &#39;a2 :&gt; IConvertible) + 1 sobrecarga
-  static member Candlestick: ``open`` : seq&lt;#IConvertible&gt; * high: seq&lt;#IConvertible&gt; * low: seq&lt;#IConvertible&gt; * close: seq&lt;#IConvertible&gt; * x: seq&lt;#IConvertible&gt; * ?Name: string * ?ShowLegend: bool * ?Opacity: float * ?Text: &#39;a5 * ?MultiText: seq&lt;&#39;a5&gt; * ?Line: Line * ?IncreasingColor: Color * ?Increasing: FinanceMarker * ?DecreasingColor: Color * ?Decreasing: FinanceMarker * ?WhiskerWidth: float * ?UseDefaults: bool -&gt; GenericChart (requires &#39;a5 :&gt; IConvertible) + 1 sobrecarga
-  static member Column: values: seq&lt;#IConvertible&gt; * ?Keys: seq&lt;#IConvertible&gt; * ?Name: string * ?ShowLegend: bool * ?Opacity: float * ?MultiOpacity: seq&lt;float&gt; * ?Text: &#39;a2 * ?MultiText: seq&lt;&#39;a2&gt; * ?MarkerColor: Color * ?MarkerColorScale: Colorscale * ?MarkerOutline: Line * ?MarkerPatternShape: PatternShape * ?MultiMarkerPatternShape: seq&lt;PatternShape&gt; * ?MarkerPattern: Pattern * ?Marker: Marker * ?Base: #IConvertible * ?Width: &#39;a4 * ?MultiWidth: seq&lt;&#39;a4&gt; * ?TextPosition: TextPosition * ?MultiTextPosition: seq&lt;TextPosition&gt; * ?UseDefaults: bool -&gt; GenericChart (requires &#39;a2 :&gt; IConvertible and &#39;a4 :&gt; IConvertible) + 1 sobrecarga
+  static member AnnotatedHeatmap: zData: seq&lt;#seq&lt;&#39;a1&gt;&gt; * annotationText: seq&lt;#seq&lt;string&gt;&gt; * ?Name: string * ?ShowLegend: bool * ?Opacity: float * ?X: seq&lt;#IConvertible&gt; * ?XGap: int * ?Y: seq&lt;#IConvertible&gt; * ?YGap: int * ?Text: &#39;a5 * ?MultiText: seq&lt;&#39;a5&gt; * ?ColorBar: ColorBar * ?ColorScale: Colorscale * ?ShowScale: bool * ?ReverseScale: bool * ?ZSmooth: SmoothAlg * ?Transpose: bool * ?UseWebGL: bool * ?ReverseYAxis: bool * ?UseDefaults: bool -&gt; GenericChart (requires &#39;a1 :&gt; IConvertible and &#39;a5 :&gt; IConvertible) + 1 overload
+  static member Area: x: seq&lt;#IConvertible&gt; * y: seq&lt;#IConvertible&gt; * ?ShowMarkers: bool * ?Name: string * ?ShowLegend: bool * ?Opacity: float * ?MultiOpacity: seq&lt;float&gt; * ?Text: &#39;a2 * ?MultiText: seq&lt;&#39;a2&gt; * ?TextPosition: TextPosition * ?MultiTextPosition: seq&lt;TextPosition&gt; * ?MarkerColor: Color * ?MarkerColorScale: Colorscale * ?MarkerOutline: Line * ?MarkerSymbol: MarkerSymbol * ?MultiMarkerSymbol: seq&lt;MarkerSymbol&gt; * ?Marker: Marker * ?LineColor: Color * ?LineColorScale: Colorscale * ?LineWidth: float * ?LineDash: DrawingStyle * ?Line: Line * ?StackGroup: string * ?Orientation: Orientation * ?GroupNorm: GroupNorm * ?FillColor: Color * ?UseWebGL: bool * ?UseDefaults: bool -&gt; GenericChart (requires &#39;a2 :&gt; IConvertible) + 1 overload
+  static member Bar: values: seq&lt;#IConvertible&gt; * ?Keys: seq&lt;#IConvertible&gt; * ?Name: string * ?ShowLegend: bool * ?Opacity: float * ?MultiOpacity: seq&lt;float&gt; * ?Text: &#39;a2 * ?MultiText: seq&lt;&#39;a2&gt; * ?MarkerColor: Color * ?MarkerColorScale: Colorscale * ?MarkerOutline: Line * ?MarkerPatternShape: PatternShape * ?MultiMarkerPatternShape: seq&lt;PatternShape&gt; * ?MarkerPattern: Pattern * ?Marker: Marker * ?Base: #IConvertible * ?Width: &#39;a4 * ?MultiWidth: seq&lt;&#39;a4&gt; * ?TextPosition: TextPosition * ?MultiTextPosition: seq&lt;TextPosition&gt; * ?UseDefaults: bool -&gt; GenericChart (requires &#39;a2 :&gt; IConvertible and &#39;a4 :&gt; IConvertible) + 1 overload
+  static member BoxPlot: ?X: seq&lt;#IConvertible&gt; * ?Y: seq&lt;#IConvertible&gt; * ?Name: string * ?ShowLegend: bool * ?Text: &#39;a2 * ?MultiText: seq&lt;&#39;a2&gt; * ?FillColor: Color * ?MarkerColor: Color * ?Marker: Marker * ?Opacity: float * ?WhiskerWidth: float * ?BoxPoints: BoxPoints * ?BoxMean: BoxMean * ?Jitter: float * ?PointPos: float * ?Orientation: Orientation * ?OutlineColor: Color * ?OutlineWidth: float * ?Outline: Line * ?AlignmentGroup: string * ?OffsetGroup: string * ?Notched: bool * ?NotchWidth: float * ?QuartileMethod: QuartileMethod * ?UseDefaults: bool -&gt; GenericChart (requires &#39;a2 :&gt; IConvertible) + 2 overloads
+  static member Bubble: x: seq&lt;#IConvertible&gt; * y: seq&lt;#IConvertible&gt; * sizes: seq&lt;int&gt; * ?Name: string * ?ShowLegend: bool * ?Opacity: float * ?MultiOpacity: seq&lt;float&gt; * ?Text: &#39;a2 * ?MultiText: seq&lt;&#39;a2&gt; * ?TextPosition: TextPosition * ?MultiTextPosition: seq&lt;TextPosition&gt; * ?MarkerColor: Color * ?MarkerColorScale: Colorscale * ?MarkerOutline: Line * ?MarkerSymbol: MarkerSymbol * ?MultiMarkerSymbol: seq&lt;MarkerSymbol&gt; * ?Marker: Marker * ?LineColor: Color * ?LineColorScale: Colorscale * ?LineWidth: float * ?LineDash: DrawingStyle * ?Line: Line * ?StackGroup: string * ?Orientation: Orientation * ?GroupNorm: GroupNorm * ?UseWebGL: bool * ?UseDefaults: bool -&gt; GenericChart (requires &#39;a2 :&gt; IConvertible) + 1 overload
+  static member Candlestick: ``open`` : seq&lt;#IConvertible&gt; * high: seq&lt;#IConvertible&gt; * low: seq&lt;#IConvertible&gt; * close: seq&lt;#IConvertible&gt; * x: seq&lt;#IConvertible&gt; * ?Name: string * ?ShowLegend: bool * ?Opacity: float * ?Text: &#39;a5 * ?MultiText: seq&lt;&#39;a5&gt; * ?Line: Line * ?IncreasingColor: Color * ?Increasing: FinanceMarker * ?DecreasingColor: Color * ?Decreasing: FinanceMarker * ?WhiskerWidth: float * ?UseDefaults: bool -&gt; GenericChart (requires &#39;a5 :&gt; IConvertible) + 1 overload
+  static member Column: values: seq&lt;#IConvertible&gt; * ?Keys: seq&lt;#IConvertible&gt; * ?Name: string * ?ShowLegend: bool * ?Opacity: float * ?MultiOpacity: seq&lt;float&gt; * ?Text: &#39;a2 * ?MultiText: seq&lt;&#39;a2&gt; * ?MarkerColor: Color * ?MarkerColorScale: Colorscale * ?MarkerOutline: Line * ?MarkerPatternShape: PatternShape * ?MultiMarkerPatternShape: seq&lt;PatternShape&gt; * ?MarkerPattern: Pattern * ?Marker: Marker * ?Base: #IConvertible * ?Width: &#39;a4 * ?MultiWidth: seq&lt;&#39;a4&gt; * ?TextPosition: TextPosition * ?MultiTextPosition: seq&lt;TextPosition&gt; * ?UseDefaults: bool -&gt; GenericChart (requires &#39;a2 :&gt; IConvertible and &#39;a4 :&gt; IConvertible) + 1 overload
   static member Contour: zData: seq&lt;#seq&lt;&#39;a1&gt;&gt; * ?Name: string * ?ShowLegend: bool * ?Opacity: float * ?X: seq&lt;#IConvertible&gt; * ?Y: seq&lt;#IConvertible&gt; * ?Text: &#39;a4 * ?MultiText: seq&lt;&#39;a4&gt; * ?ColorBar: ColorBar * ?ColorScale: Colorscale * ?ShowScale: bool * ?ReverseScale: bool * ?Transpose: bool * ?ContourLineColor: Color * ?ContourLineDash: DrawingStyle * ?ContourLineSmoothing: float * ?ContourLine: Line * ?ContoursColoring: ContourColoring * ?ContoursOperation: ConstraintOperation * ?ContoursType: ContourType * ?ShowContourLabels: bool * ?ContourLabelFont: Font * ?Contours: Contours * ?FillColor: Color * ?NContours: int * ?UseDefaults: bool -&gt; GenericChart (requires &#39;a1 :&gt; IConvertible and &#39;a4 :&gt; IConvertible)
   static member Funnel: x: seq&lt;#IConvertible&gt; * y: seq&lt;#IConvertible&gt; * ?Name: string * ?ShowLegend: bool * ?Opacity: float * ?Width: float * ?Offset: float * ?Text: &#39;a2 * ?MultiText: seq&lt;&#39;a2&gt; * ?TextPosition: TextPosition * ?MultiTextPosition: seq&lt;TextPosition&gt; * ?Orientation: Orientation * ?AlignmentGroup: string * ?OffsetGroup: string * ?MarkerColor: Color * ?MarkerOutline: Line * ?Marker: Marker * ?TextInfo: TextInfo * ?ConnectorLineColor: Color * ?ConnectorLineStyle: DrawingStyle * ?ConnectorFillColor: Color * ?ConnectorLine: Line * ?Connector: FunnelConnector * ?InsideTextFont: Font * ?OutsideTextFont: Font * ?UseDefaults: bool -&gt; GenericChart (requires &#39;a2 :&gt; IConvertible)
-  static member Heatmap: zData: seq&lt;#seq&lt;&#39;a1&gt;&gt; * ?Name: string * ?ShowLegend: bool * ?Opacity: float * ?X: seq&lt;#IConvertible&gt; * ?XGap: int * ?Y: seq&lt;#IConvertible&gt; * ?YGap: int * ?Text: &#39;a4 * ?MultiText: seq&lt;&#39;a4&gt; * ?ColorBar: ColorBar * ?ColorScale: Colorscale * ?ShowScale: bool * ?ReverseScale: bool * ?ZSmooth: SmoothAlg * ?Transpose: bool * ?UseWebGL: bool * ?ReverseYAxis: bool * ?UseDefaults: bool -&gt; GenericChart (requires &#39;a1 :&gt; IConvertible and &#39;a4 :&gt; IConvertible) + 1 sobrecarga
+  static member Heatmap: zData: seq&lt;#seq&lt;&#39;a1&gt;&gt; * ?Name: string * ?ShowLegend: bool * ?Opacity: float * ?X: seq&lt;#IConvertible&gt; * ?XGap: int * ?Y: seq&lt;#IConvertible&gt; * ?YGap: int * ?Text: &#39;a4 * ?MultiText: seq&lt;&#39;a4&gt; * ?ColorBar: ColorBar * ?ColorScale: Colorscale * ?ShowScale: bool * ?ReverseScale: bool * ?ZSmooth: SmoothAlg * ?Transpose: bool * ?UseWebGL: bool * ?ReverseYAxis: bool * ?UseDefaults: bool -&gt; GenericChart (requires &#39;a1 :&gt; IConvertible and &#39;a4 :&gt; IConvertible) + 1 overload
   ...</div>
 <div class="fsdocs-tip" id="fs41">static member Chart.Line: xy: seq&lt;#System.IConvertible * #System.IConvertible&gt; * ?ShowMarkers: bool * ?Name: string * ?ShowLegend: bool * ?Opacity: float * ?MultiOpacity: seq&lt;float&gt; * ?Text: &#39;a2 * ?MultiText: seq&lt;&#39;a2&gt; * ?TextPosition: StyleParam.TextPosition * ?MultiTextPosition: seq&lt;StyleParam.TextPosition&gt; * ?MarkerColor: Color * ?MarkerColorScale: StyleParam.Colorscale * ?MarkerOutline: Line * ?MarkerSymbol: StyleParam.MarkerSymbol * ?MultiMarkerSymbol: seq&lt;StyleParam.MarkerSymbol&gt; * ?Marker: TraceObjects.Marker * ?LineColor: Color * ?LineColorScale: StyleParam.Colorscale * ?LineWidth: float * ?LineDash: StyleParam.DrawingStyle * ?Line: Line * ?StackGroup: string * ?Orientation: StyleParam.Orientation * ?GroupNorm: StyleParam.GroupNorm * ?Fill: StyleParam.Fill * ?FillColor: Color * ?UseWebGL: bool * ?UseDefaults: bool -&gt; GenericChart.GenericChart (requires &#39;a2 :&gt; System.IConvertible)<br />static member Chart.Line: x: seq&lt;#System.IConvertible&gt; * y: seq&lt;#System.IConvertible&gt; * ?ShowMarkers: bool * ?Name: string * ?ShowLegend: bool * ?Opacity: float * ?MultiOpacity: seq&lt;float&gt; * ?Text: &#39;c * ?MultiText: seq&lt;&#39;c&gt; * ?TextPosition: StyleParam.TextPosition * ?MultiTextPosition: seq&lt;StyleParam.TextPosition&gt; * ?MarkerColor: Color * ?MarkerColorScale: StyleParam.Colorscale * ?MarkerOutline: Line * ?MarkerSymbol: StyleParam.MarkerSymbol * ?MultiMarkerSymbol: seq&lt;StyleParam.MarkerSymbol&gt; * ?Marker: TraceObjects.Marker * ?LineColor: Color * ?LineColorScale: StyleParam.Colorscale * ?LineWidth: float * ?LineDash: StyleParam.DrawingStyle * ?Line: Line * ?StackGroup: string * ?Orientation: StyleParam.Orientation * ?GroupNorm: StyleParam.GroupNorm * ?Fill: StyleParam.Fill * ?FillColor: Color * ?UseWebGL: bool * ?UseDefaults: bool -&gt; GenericChart.GenericChart (requires &#39;c :&gt; System.IConvertible)</div>
-<div class="fsdocs-tip" id="fs42">Propriedade. System.Array.Length: int with get<br /><em>&lt;summary&gt;Gets the total number of elements in all the dimensions of the &lt;see cref=&quot;T:System.Array&quot; /&gt;.&lt;/summary&gt;<br />&lt;exception cref=&quot;T:System.OverflowException&quot;&gt;The array is multidimensional and contains more than &lt;see cref=&quot;F:System.Int32.MaxValue&quot; /&gt; elements.&lt;/exception&gt;<br />&lt;returns&gt;The total number of elements in all the dimensions of the &lt;see cref=&quot;T:System.Array&quot; /&gt;; zero if there are no elements in the array.&lt;/returns&gt;</em></div>
+<div class="fsdocs-tip" id="fs42">property System.Array.Length: int with get<br /><em>&lt;summary&gt;Gets the total number of elements in all the dimensions of the &lt;see cref=&quot;T:System.Array&quot; /&gt;.&lt;/summary&gt;<br />&lt;exception cref=&quot;T:System.OverflowException&quot;&gt;The array is multidimensional and contains more than &lt;see cref=&quot;F:System.Int32.MaxValue&quot; /&gt; elements.&lt;/exception&gt;<br />&lt;returns&gt;The total number of elements in all the dimensions of the &lt;see cref=&quot;T:System.Array&quot; /&gt;; zero if there are no elements in the array.&lt;/returns&gt;</em></div>
 <div class="fsdocs-tip" id="fs43">static member Chart.combine: gCharts: seq&lt;GenericChart.GenericChart&gt; -&gt; GenericChart.GenericChart</div>
 <div class="fsdocs-tip" id="fs44">static member Chart.withTitle: title: Title -&gt; (GenericChart.GenericChart -&gt; GenericChart.GenericChart)<br />static member Chart.withTitle: title: string * ?TitleFont: Font -&gt; (GenericChart.GenericChart -&gt; GenericChart.GenericChart)</div>
 <div class="fsdocs-tip" id="fs45">static member Chart.withXAxisStyle: ?TitleText: string * ?TitleFont: Font * ?TitleStandoff: int * ?Title: Title * ?Color: Color * ?AxisType: StyleParam.AxisType * ?MinMax: (#System.IConvertible * #System.IConvertible) * ?Mirror: StyleParam.Mirror * ?ShowSpikes: bool * ?SpikeColor: Color * ?SpikeThickness: int * ?ShowLine: bool * ?LineColor: Color * ?ShowGrid: bool * ?GridColor: Color * ?ZeroLine: bool * ?ZeroLineColor: Color * ?Anchor: StyleParam.LinearAxisId * ?Side: StyleParam.Side * ?Overlaying: StyleParam.LinearAxisId * ?Domain: (float * float) * ?Position: float * ?CategoryOrder: StyleParam.CategoryOrder * ?CategoryArray: seq&lt;#System.IConvertible&gt; * ?RangeSlider: LayoutObjects.RangeSlider * ?RangeSelector: LayoutObjects.RangeSelector * ?BackgroundColor: Color * ?ShowBackground: bool * ?Id: StyleParam.SubPlotId -&gt; (GenericChart.GenericChart -&gt; GenericChart.GenericChart)</div>
@@ -304,18 +304,18 @@ de Microsoft.FSharp.Collections<br /><em>&lt;summary&gt;Contains operations for 
 &lt;/remarks&gt;</em></div>
 <div class="fsdocs-tip" id="fs51">Multiple items<br />type NDarray =
   inherit PythonObject
-  new: pyobj: PyObject -&gt; unit + 2 sobrecargas
+  new: pyobj: PyObject -&gt; unit + 2 overloads
   member Equals: obj: obj -&gt; bool
   member GetData&lt;&#39;T&gt; : unit -&gt; &#39;T[]
   member abs: ?out: NDarray * ?where: NDarray -&gt; NDarray
   member absolute: ?out: NDarray * ?where: NDarray -&gt; NDarray
   member add: x1: NDarray * ?out: NDarray * ?where: NDarray -&gt; NDarray
-  member all: axis: Axis * ?out: NDarray * ?keepdims: Nullable&lt;bool&gt; -&gt; NDarray&lt;bool&gt; + 1 sobrecarga
+  member all: axis: Axis * ?out: NDarray * ?keepdims: Nullable&lt;bool&gt; -&gt; NDarray&lt;bool&gt; + 1 overload
   member allclose: a: NDarray * ?rtol: float32 * ?atol: float32 * ?equal_nan: bool -&gt; bool
   member angle: ?deg: Nullable&lt;bool&gt; -&gt; NDarray
   ...<br /><br />--------------------<br />type NDarray&lt;&#39;T&gt; =
   inherit NDarray
-  new: t: NDarray -&gt; unit + 2 sobrecargas
+  new: t: NDarray -&gt; unit + 2 overloads
   member GetData: unit -&gt; &#39;T[]
   member Item: NDarray&lt;&#39;T&gt;
   member Item: NDarray
@@ -328,7 +328,7 @@ de Microsoft.FSharp.Collections<br /><em>&lt;summary&gt;Contains operations for 
   static member abs: x: NDarray * ?out: NDarray * ?where: NDarray -&gt; NDarray
   static member absolute: x: NDarray * ?out: NDarray * ?where: NDarray -&gt; NDarray
   static member add: x2: NDarray * x1: NDarray * ?out: NDarray * ?where: NDarray -&gt; NDarray
-  static member all: a: NDarray * axis: Axis * ?out: NDarray * ?keepdims: Nullable&lt;bool&gt; -&gt; NDarray&lt;bool&gt; + 1 sobrecarga
+  static member all: a: NDarray * axis: Axis * ?out: NDarray * ?keepdims: Nullable&lt;bool&gt; -&gt; NDarray&lt;bool&gt; + 1 overload
   static member allclose: b: NDarray * a: NDarray * ?rtol: float32 * ?atol: float32 * ?equal_nan: bool -&gt; bool
   static member amax: a: NDarray * ?axis: Axis * ?out: NDarray * ?keepdims: Nullable&lt;bool&gt; * ?initial: ValueType -&gt; NDarray
   static member amin: a: NDarray * ?axis: Axis * ?out: NDarray * ?keepdims: Nullable&lt;bool&gt; * ?initial: ValueType -&gt; NDarray
@@ -344,7 +344,7 @@ de Microsoft.FSharp.Collections<br /><em>&lt;summary&gt;Contains operations for 
 <div class="fsdocs-tip" id="fs55">val toSharp: xs: NDarray -&gt; float array</div>
 <div class="fsdocs-tip" id="fs56">val xs: NDarray</div>
 <div class="fsdocs-tip" id="fs57">NDarray.astype(dtype: Dtype, ?order: string, ?casting: string, ?subok: System.Nullable&lt;bool&gt;, ?copy: System.Nullable&lt;bool&gt;) : NDarray</div>
-<div class="fsdocs-tip" id="fs58">Propriedade. np.float_: Dtype with get, set</div>
+<div class="fsdocs-tip" id="fs58">property np.float_: Dtype with get, set</div>
 
         </div>
 

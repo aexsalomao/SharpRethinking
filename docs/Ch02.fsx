@@ -64,35 +64,40 @@ Medium
 *)
 
 (**
-### **2M1**. Recall the globe tossing model from the chapter. Compute and plot the grid approximate posterior distribution for each of the following sets of observations. 
-### In each case, assume a uniform prior for p.
+### **2M1**. 
+### Recall the globe tossing model from the chapter. Compute and plot the grid approximate posterior distribution for each of the following sets of observations. In each case, assume a uniform prior for p.
 
-For the globe tossing model, the random variable $X$ represents the number of times you observe *water* when tossing the globe.
- The true proportion of water covering the globe is $p$, and so the probability of observing *water* (W) on each single independent 
+For the globe tossing model, let the random variable $X$ represent the number of times you observe *water* when tossing the globe.
+ It is given that the true proportion of water covering the globe is $p$, and so the probability of observing *water* (W) on each single independent 
  toss is also $p$. Conversely, the probability or true proportion of *land* (L) covering the globe is $q = (1 - p)$.
 
 The probability of getting exactly $k$ successes in $n$ independent Bernoulli trials is given by the probability mass function (PMF):
 
-$$f(k,n,p)=Pr(k;n,p)=Pr(X=k)={n \choose x}p^{k}q^{n-k} \text{ , for } k = 0, 1, 2,  \ldots, n$$
+$$f(k,n,p)=Pr(k;n,p)=Pr(X=k)={n \choose k}p^{k}q^{n-k} \text{ , for } k = 0, 1, 2,  \ldots, n$$
 
 $$n \in \mathbb{N} \text{ , } p \in [0,1]$$
 
-Here, ${n \choose x} = \frac{n!}{k!(n-k)!}$, represents the number of ways "$k$ successes" can happen out of "$n$ trials."
+Here, ${n \choose k} = \frac{n!}{k!(n-k)!}$, represents the number of ways "$k$ successes" can happen out of "$n$ trials."
 
 For example, in the globe tossing model, if we consider $n=3$ and $k=1$:
 
-Possible outcomes: 
+Possible outcomes or paths: 
 
-$\{ LLL, \boldsymbol{LLW}, \boldsymbol{LWL} , \boldsymbol{WLL}, LWW , WWL, WWW \}$
+$\{ LLL, \boldsymbol{LLW}, \boldsymbol{LWL} , \boldsymbol{WLL}, WWL , WLW, LWW, WWW \}$
 
 Equivalently, 
 
-${n \choose x} = \frac{3!}{( 1! (3 - 1)! )} = 3$
+$\binom{n}{k} = \frac{3!}{1! \times (3 - 1)!} = 3$
 
-For each possible path, we have to account for the respective probabities $p$ and $q$. 
+For each possible path, we have to account for the respective probabilities $p$ and $q$. 
  Since each Bernoulli trial is independent we can simply multiply the probabilities $p$ and $q$ to obtain the probability of a successful path ($X=k$).
- In our example, $p \cdot p \cdot q$ or simply $p^{2} \cdot q$. And so $P(X=1)$ is the sum of the probabilities of all paths with exactly $1$ successes,
- which is ${3 \choose 1}p^{1}q^{2}$.
+ In our example, the probability of observing every such path is $p \cdot p \cdot q$ or simply $p^{2} \cdot q$. 
+ And so $P(X=1)$ is the sum of the probabilities of all paths with exactly $1$ successes:
+ 
+$P(\boldsymbol{LLW})=P(\boldsymbol{LWL})=P(\boldsymbol{WLL})=p^{1}q^{2}$
+
+$P(X=1)=P(\boldsymbol{LLW}) + P(\boldsymbol{LWL}) + P(\boldsymbol{WLL})=3\times p^{1}q^{2}$
+
 *)
 
 let binomialBreakdownFig priorFunc nTrials nSucesses = 
@@ -120,7 +125,8 @@ let binomialBreakdownFig priorFunc nTrials nSucesses =
     |> Chart.withMathTex(true)
 
 (**
-### 2M1. Uniform Prior | N=3, W=3, L=0
+### **2M1.** 
+### Uniform Prior | N=3, W=3, L=0
 *)
 (***do-not-eval***)
 binomialBreakdownFig (fun x -> 1.) 3 3 |> Chart.show
@@ -130,7 +136,8 @@ binomialBreakdownFig (fun x -> 1.) 3 3
 (*** include-it-raw ***)
 
 (**
-### 2M1. Uniform Prior | N=4, W=3, L=1
+### **2M1.** 
+### Uniform Prior | N=4, W=3, L=1
 *)
 (***do-not-eval***)
 binomialBreakdownFig (fun x -> 1.) 4 3 |> Chart.show
@@ -140,7 +147,8 @@ binomialBreakdownFig (fun x -> 1.) 4 3
 (*** include-it-raw ***)
 
 (**
-### 2M1. Uniform Prior | N=7, W=5, L=2
+### **2M1.** 
+### Uniform Prior | N=7, W=5, L=2
 *)
 (***do-not-eval***)
 binomialBreakdownFig (fun x -> 1.) 7 5 |> Chart.show
@@ -150,11 +158,13 @@ binomialBreakdownFig (fun x -> 1.) 7 5
 (*** include-it-raw ***)
 
 (**
-### **2M2**. Now assume a prior for $p$ that is equal to zero when $p < 0.5$ and is a positive constant when p > 0.5 . Again compute and plot the grid approximate posterior distribution for each of the sets of observations in the problem just above.
+### **2M2**. 
+### Now assume a prior for $p$ that is equal to zero when $p < 0.5$ and is a positive constant when p > 0.5 . Again compute and plot the grid approximate posterior distribution for each of the sets of observations in the problem just above.
 *)
 
 (**
-### 2M2. Heavyside step function Prior | N=3, W=3, L=0
+### **2M2.** 
+### Heavyside step function Prior | N=3, W=3, L=0
 *)
 (***do-not-eval***)
 binomialBreakdownFig (fun x -> if x < 0.5 then 0. else 1.) 3 3
@@ -164,7 +174,8 @@ binomialBreakdownFig (fun x -> if x < 0.5 then 0. else 1.) 3 3
 (*** include-it-raw ***)
 
 (**
-### 2M2. Heavyside step function Posterior | N=4, W=3, L=1
+### **2M2.** 
+### Heavyside step function Posterior | N=4, W=3, L=1
 *)
 (***do-not-eval***)
 binomialBreakdownFig (fun x -> if x < 0.5 then 0. else 1.) 4 3
@@ -174,7 +185,8 @@ binomialBreakdownFig (fun x -> if x < 0.5 then 0. else 1.) 4 3
 (*** include-it-raw ***)
 
 (**
-### 2M2. (W,W,W) - Heavyside step function Prior | N=7, W=5, L=2
+### **2M2.** 
+### Heavyside step function Prior | N=7, W=5, L=2
 *)
 (***do-not-eval***)
 binomialBreakdownFig (fun x -> if x < 0.5 then 0. else 1.) 7 5
@@ -209,32 +221,77 @@ multiBinominalPosteriorFig (fun x -> 1.) [10 .. 10 .. 100] 10 1
 (*** include-it-raw ***)
 
 (**
-2M3. 
-Suppose there are two globes, one for Earth and one for Mars. 
-The Earth globe is 70% covered in water. The Mars globe is 100% land. 
-Further suppose that one of these globes—you don’t know which—was tossed in the air and produced a “land” observation. 
-Assume that each globe was equally likely to be tossed. Show that the posterior probability that the globe was the Earth, 
-conditional on seeing “land” (Pr(Earth|land)), is 0.23.
-
-Pr(Earth|Land) = 0.23
-Pr(Earth|Land) = Pr(Land|Earth) * Pr(Earth) / Pr(Land)
+### **2M3.** 
+### Suppose there are two globes, one for Earth and one for Mars. The Earth globe is 70% covered in water. The Mars globe is 100% land. Further suppose that one of these globes—you don’t know which—was tossed in the air and produced a “land” observation. Assume that each globe was equally likely to be tossed. Show that the posterior probability that the globe was the Earth, conditional on seeing “land” $Pr(Earth|Land) = 0.23$.
 *)
+
+(**
+
+$\Pr(Earth \mid Land) = \frac{\Pr(Land \mid Earth) \times \Pr(Earth)}{\Pr(Land)} = \frac{\Pr(Land \mid Earth) \times \Pr(Earth)}{(\Pr(Earth) \times \Pr(Land \mid Earth)) + (\Pr(Mars) \times \Pr(Land \mid Mars))}$
+
+*)
+
+let formatNumb (x: float) = Math.Round(x, 2)
 
 let prLandGivenEarth = 0.3
 let prLandGivenMars = 1.
 let prEarth = 0.5
 let prMars = 0.5
+let prLand = ((prMars * prLandGivenMars) + (prEarth * prLandGivenEarth))
 
-let prLand = (prMars * prLandGivenMars) + (prEarth * prLandGivenEarth)
-let prEarthGivenLand = (prLandGivenEarth * prEarth) / (prLand)
+(prLandGivenEarth * prEarth) / prLand
+|> formatNumb
+(*** include-it-raw ***)
 
 (**
-2M4.
+### **2M4.** 
+### Suppose you have a deck with only three cards. Each card has two sides, and each side is either black or white. One card has two black sides. The second card has one black and one white side. The third card has two white sides. Now suppose all three cards are placed in a bag and shuffled. Someone reaches into the bag and pulls out a card and places it flat on a table. A black side is shown facing up, but you don’t know the color of the side facing down. Show that the probability that the other side is also black is 2/3. Use the counting method (Section 2 of the chapter) to approach this problem. This means counting up the ways that each card could produce the observed data (a black side facing up on the table).
 
-3 Cards - X, Y, Z
-2 Sides - B, W
+3 Cards, 6 Conjectures:
 
-BB, BW, WW
+$\blacksquare: (S_{1}=B, S_{2}=B), (S_{1}=B, S_{2}=B)$
+
+$\bullet: (S_{1}=B, S_{2}=W), (S_{1}=W, S_{2}=B)$
+
+$\blacktriangle: (S_{1}=W, S_{2}=W) (S_{1}=W, S_{2}=W)$
+
+ # Ways B can appear as the side facing up: 3
+
+ # Ways B can appear as the side facing down: 2
+
+$\Pr(\blacksquare \mid S_{1}=B) = \frac{2}{3}$
+
+Using Bayes theorem:
+
+$\Pr(\blacksquare \mid S_{1}=B) = \frac{\Pr(S_{1}=B \mid \blacksquare) \times \Pr(\blacksquare)}{\Pr(S_{1}=B)} = \frac{1 \times \frac{1}{3}}{\frac{1}{2}} = \frac{2}{3}$
+*)
+
+(**
+### **2M5.**
+### Now suppose there are four cards: B/B, B/W, W/W, and another B/B. Again suppose a card is drawn from the bag and a black side appears face up. Again calculate the probability that the other side is black.
+
+4th card: $\blacksquare$
+
+ # Ways B can appear as the side facing up: 3 + 2 = 5
+
+ # Ways B can appear as the side facing down: 2 + 2 = 4
+
+$\Pr(\blacksquare \mid S_{1}=B) = \frac{4}{5}$
+
+$\Pr(\blacksquare \mid S_{1}=B) = \frac{\Pr(S_{1}=B \mid \blacksquare) \times \Pr(\blacksquare)}{\Pr(S_{1}=B)} = \frac{1 \times \frac{2}{4}}{\frac{5}{8}} = \frac{2}{3}$
+
+*)
+
+(**
+### **2M6.**
+### Imagine that black ink is heavy, and so cards with black sides are heavier than cards with white sides. As a result, it’s less likely that a card with black sides is pulled from the bag. So again assume there are three cards: B/B, B/W, and W/W. After experimenting a number of times, you conclude that for every way to pull the B/B card from the bag, there are 2 ways to pull the B/W card and 3 ways to pull the W/W card. Again suppose that a card is pulled and a black side appears face up. Show that the probability the other side is black is now 0.5. Use the counting method, as before.
+
+ # Ways B can appear as the side facing up: 1 ($\bullet$) + 2 ($\square$) -> ***2*** ($\bullet$) + 2 ($\square$) = 4
+
+ # Ways B can appear as the side facing down: 2 ($\square$) = 2
+
+$\Pr(\blacksquare \mid S_{1}=B) = \frac{2}{4} = \frac{1}{2}$
+
 *)
 
 (**
